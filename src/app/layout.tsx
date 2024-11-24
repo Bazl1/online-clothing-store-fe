@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 
+import { MainLayout } from "@/layouts";
+
 import "@/shared/styles/styles.scss";
 
 export const metadata: Metadata = {
@@ -16,7 +18,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <main className="main">{children}</main>
+                <MainLayout>{children}</MainLayout>
             </body>
         </html>
     );
