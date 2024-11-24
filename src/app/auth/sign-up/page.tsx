@@ -1,5 +1,11 @@
+import { SignUp } from "@/widgets";
+
 const page = () => {
-    return <div>page</div>;
+    return (
+        <>
+            <SignUp />
+        </>
+    );
 };
 
 export default page;

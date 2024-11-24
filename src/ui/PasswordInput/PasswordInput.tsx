@@ -61,6 +61,7 @@ const PasswordInput = forwardRef(
                         {...props}
                     />
                     <button
+                        type="button"
                         className={cn(styles.input__btn)}
                         disabled={isDisabled}
                         onClick={handleTogglePasswordVisibility}

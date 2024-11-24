@@ -9,7 +9,7 @@ const SignIn = () => {
                 <div className={styles.login__inner}>
                     <div className={styles.login__box}>
                         <h2 className={styles.login__title}>
-                            Sign In to continue
+                            Welcome! <span>Sign in to continue</span>
                         </h2>
                         <SignInForm />
                     </div>
