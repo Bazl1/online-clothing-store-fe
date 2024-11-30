@@ -1,9 +1,18 @@
+import {
+    ChartBarStacked,
+    ChartNoAxesCombined,
+    Package,
+    Tags,
+    UserPen,
+    Users,
+    History
+} from "lucide-react";
+
 export const HOME_ROUTE = "/";
 export const CATALOG_ROUTE = "/catalog";
 export const PRODUCT_ROUTE = "/product";
 export const PROFILE_ROUTE = "/profile";
 export const HISTORY_ROUTE = "/profile/history";
-export const SETTINGS_ROUTE = "/profile/settings";
 export const CART_ROUTE = "/cart";
 export const FAVORITES_ROUTE = "/favorites";
 export const CHECKOUT_ROUTE = "/checkout";
@@ -26,5 +35,46 @@ export const menuList = [
     {
         href: CATALOG_ROUTE,
         title: "Catalog"
+    }
+];
+
+export const profileMenuList = [
+    {
+        href: PROFILE_ROUTE,
+        title: "Profile",
+        icon: <UserPen size={20} strokeWidth={1.5} />
+    },
+    {
+        href: HISTORY_ROUTE,
+        title: "History",
+        icon: <History size={20} strokeWidth={1.5} />
+    }
+];
+
+export const adminMenuList = [
+    {
+        href: ADMIN_ROUTE,
+        title: "Analytics",
+        icon: <ChartNoAxesCombined size={20} strokeWidth={1.5} />
+    },
+    {
+        href: ADMIN_PRODUCTS_ROUTE,
+        title: "Products",
+        icon: <Package size={20} strokeWidth={1.5} />
+    },
+    {
+        href: ADMIN_CATEGORIES_ROUTE,
+        title: "Categories",
+        icon: <ChartBarStacked size={20} strokeWidth={1.5} />
+    },
+    {
+        href: ADMIN_USERS_ROUTE,
+        title: "Users",
+        icon: <Users size={20} strokeWidth={1.5} />
+    },
+    {
+        href: ADMIN_ORDERS_ROUTE,
+        title: "Orders",
+        icon: <Tags size={20} strokeWidth={1.5} />
     }
 ];
