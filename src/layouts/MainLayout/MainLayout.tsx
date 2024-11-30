@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
