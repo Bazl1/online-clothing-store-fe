@@ -6,14 +6,21 @@ import { Heart, ShoppingBag, UserRound } from "lucide-react";
 
 import { Button } from "@/ui";
 
-import { menuList, SIGN_IN_ROUTE, SIGN_UP_ROUTE } from "@/shared";
+import { useAuthStore } from "@/store";
+import {
+    menuList,
+    PROFILE_ROUTE,
+    SIGN_IN_ROUTE,
+    SIGN_UP_ROUTE
+} from "@/shared";
 
 import styles from "./Header.module.scss";
 
 const Header = () => {
-    const isAuth = false;
-
+    const user = useAuthStore((state) => state.user);
     const router = useRouter();
+
+    const goProfile = () => [router.push(PROFILE_ROUTE)];
 
     const goSignIn = () => {
         router.push(SIGN_IN_ROUTE);
@@ -52,7 +59,7 @@ const Header = () => {
                         </ul>
                     </nav>
                     <div className={styles.header__row}>
-                        {isAuth ? (
+                        {user ? (
                             <>
                                 <button className={styles.header__btn}>
                                     <Heart size={16} />
@@ -60,7 +67,10 @@ const Header = () => {
                                 <button className={styles.header__btn}>
                                     <ShoppingBag size={16} />
                                 </button>
-                                <button className={styles.header__btn}>
+                                <button
+                                    className={styles.header__btn}
+                                    onClick={goProfile}
+                                >
                                     <UserRound size={16} />
                                 </button>
                             </>

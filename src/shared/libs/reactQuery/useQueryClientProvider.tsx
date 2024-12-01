@@ -13,6 +13,9 @@ interface ErrorResponse {
 
 const useQueryClientProvider = () => {
     const errorHandler = (error: AxiosError<ErrorResponse>) => {
+        if (error.response?.status === 401 || error.response?.status === 403) {
+            return;
+        }
         return toast.error(error.response?.data.message || ERROR_MESSAGES);
     };
 

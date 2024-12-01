@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 
-import { MainLayout } from "@/layouts";
+import { AuthLayout, MainLayout } from "@/layouts";
 
 import "@/shared/styles/styles.scss";
 
@@ -18,7 +18,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <MainLayout>{children}</MainLayout>
+                <MainLayout>
+                    <AuthLayout>{children}</AuthLayout>
+                </MainLayout>
             </body>
         </html>
     );

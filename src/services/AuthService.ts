@@ -1,17 +1,21 @@
+import {
+    instance,
+    SignInRequest,
+    SignInResponse,
+    SignUpRequest,
+    SignUpResponse
+} from "@/shared";
+
 export default class AuthService {
-    static signIn = () => {
-        return;
+    static signIn = (data: SignInRequest): Promise<SignInResponse> => {
+        return instance.post("auth/login", data);
     };
 
-    static signUp = () => {
-        return;
+    static signUp = (data: SignUpRequest): Promise<SignUpResponse> => {
+        return instance.post("auth/register", data);
     };
 
-    static refresh = () => {
-        return;
-    };
-
-    static logout = () => {
-        return;
+    static logout = (): Promise<void> => {
+        return instance.post("auth/logout");
     };
 }

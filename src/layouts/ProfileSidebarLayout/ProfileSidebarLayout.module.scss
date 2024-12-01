@@ -28,4 +28,9 @@
         padding: 32px 0;
         overflow-y: auto;
     }
+
+    &__bottom {
+        border-top: 2px solid $gray-color-100;
+        padding: 16px 20px;
+    }
 }

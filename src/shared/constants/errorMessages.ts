@@ -6,3 +6,5 @@ export const MIN_LENGTH = (min: number = 8) =>
     `Minimum length is ${min} characters`;
 export const MAX_LENGTH = (max: number = 32) =>
     `Maximum length is ${max} characters`;
+
+export const PASSWORDS_DO_NOT_MATCH = "Passwords do not match";
