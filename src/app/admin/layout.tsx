@@ -1,9 +1,13 @@
 import { ReactNode } from "react";
 
-import { SidebarLayout } from "@/layouts";
+import { ProtectedLayout, SidebarLayout } from "@/layouts";
 
 const layout = ({ children }: { children: ReactNode }) => {
-    return <SidebarLayout>{children}</SidebarLayout>;
+    return (
+        <ProtectedLayout role={["admin"]}>
+            <SidebarLayout>{children}</SidebarLayout>
+        </ProtectedLayout>
+    );
 };
 
 export default layout;
