@@ -22,6 +22,7 @@ export const SIGN_IN_ROUTE = "/auth/sign-in";
 export const SIGN_UP_ROUTE = "/auth/sign-up";
 
 export const ADMIN_ROUTE = "/admin";
+export const ADMIN_DASHBOARD_ROUTE = "/admin/dashboard";
 export const ADMIN_PRODUCTS_ROUTE = "/admin/products";
 export const ADMIN_CATEGORIES_ROUTE = "/admin/categories";
 export const ADMIN_USERS_ROUTE = "/admin/users";
@@ -53,7 +54,7 @@ export const profileMenuList = [
 
 export const adminMenuList = [
     {
-        href: ADMIN_ROUTE,
+        href: ADMIN_DASHBOARD_ROUTE,
         title: "Analytics",
         icon: <ChartNoAxesCombined size={20} strokeWidth={1.5} />
     },

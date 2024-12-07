@@ -1,5 +1,6 @@
 export const ERROR_MESSAGES = "Something went wrong";
 export const REQUIRED_FIELD = "This field is required";
+export const CONFIRM_PASSWORD = "Passwords do not match";
 export const INVALID_EMAIL = "Invalid email";
 export const INVALID_PASSWORD = "Invalid password";
 export const MIN_LENGTH = (min: number = 8) =>

@@ -2,9 +2,11 @@
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import { Button, PasswordInput } from "@/ui";
 
+import { useChangePassword } from "@/apis";
 import { ProfilePasswordFormShema } from "@/shared";
 import { ProfilePasswordFormInputs } from "./ProfilePasswordForm.types";
 
@@ -19,7 +21,20 @@ const ProfilePasswordForm = () => {
         resolver: yupResolver(ProfilePasswordFormShema)
     });
 
-    const onSubmit = (data: ProfilePasswordFormInputs) => {};
+    const { mutate: changePassword } = useChangePassword({
+        onSuccess: () => {
+            toast.success("Password changed successfully");
+        }
+    });
+
+    const onSubmit = (data: ProfilePasswordFormInputs) => {
+        const requestData = {
+            password: data.currentPassword,
+            newPassword: data.newPassword
+        };
+
+        changePassword(requestData);
+    };
 
     return (
         <div className={styles.profile}>

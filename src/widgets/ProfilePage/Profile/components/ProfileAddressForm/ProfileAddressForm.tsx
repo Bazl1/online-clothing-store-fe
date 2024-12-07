@@ -2,25 +2,49 @@
 
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import { Button, Input, NumberInput } from "@/ui";
 
-import { ProfileAddressFormShema } from "@/shared";
+import { useChangeAddress } from "@/apis";
+import { useAuthStore } from "@/store";
+import { ChangeAddressResponse, ProfileAddressFormShema } from "@/shared";
 import { ProfileAddressFormInputs } from "./ProfileAddressForm.types";
 
 import styles from "./ProfileAddressForm.module.scss";
 
 const ProfileAddressForm = () => {
+    const { user, setUser } = useAuthStore((state) => state);
+
     const {
         handleSubmit,
         register,
         control,
         formState: { errors }
     } = useForm<ProfileAddressFormInputs>({
-        resolver: yupResolver(ProfileAddressFormShema)
+        resolver: yupResolver(ProfileAddressFormShema),
+        defaultValues: {
+            country: user?.address?.country ?? "",
+            state: user?.address?.state ?? "",
+            city: user?.address?.city ?? "",
+            street: user?.address?.street ?? "",
+            house: user?.address?.house ?? "",
+            flat: user?.address?.flat ?? "",
+            floor: user?.address?.floor ?? "",
+            zip: user?.address?.zip ?? ""
+        }
     });
 
-    const onSubmit = (data: ProfileAddressFormInputs) => {};
+    const { mutate: changeAddress } = useChangeAddress({
+        onSuccess: (data: ChangeAddressResponse) => {
+            setUser(data?.data);
+            toast.success("Address has been changed successfully");
+        }
+    });
+
+    const onSubmit = (data: ProfileAddressFormInputs) => {
+        changeAddress(data);
+    };
 
     return (
         <div className={styles.profile}>
