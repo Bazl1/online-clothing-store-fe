@@ -20,4 +20,26 @@
     &__search {
         max-width: 380px;
     }
+
+    &__actions {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    &__actions_select {
+        width: 240px;
+    }
+
+    &__table {
+        width: 100%;
+        margin-top: 35px;
+    }
+
+    &__pagination {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
 }

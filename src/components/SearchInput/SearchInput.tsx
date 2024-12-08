@@ -31,7 +31,7 @@ const SearchInput = ({ onChange, ...props }: SearchInputProps) => {
                 {...register("search")}
                 {...props}
             />
-            <Button type="submit">Ok</Button>
+            <Button type="submit">Ок</Button>
         </form>
     );
 };
