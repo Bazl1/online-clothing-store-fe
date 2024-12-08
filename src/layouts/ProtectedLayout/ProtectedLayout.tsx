@@ -29,7 +29,7 @@ const ProtectedLayout = ({
         }
 
         setIsLoading(false);
-    }, []);
+    }, [user]);
 
     return !isLoading ? <>{children}</> : <Loader />;
 };

@@ -1,21 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { UserRoundPlus } from "lucide-react";
+import { ListPlus } from "lucide-react";
 
-import { AdminUsersTable } from "@/widgets";
+import { AdminCategoriesTable } from "@/widgets";
 import { GroupActionsSelect, SearchInput } from "@/components";
 import { Button, Pagination } from "@/ui";
 
 import {
     PaginationLimitsList,
-    UsersGroupActionsList,
-    UsersList
+    CategoriesGroupActionsList,
+    CategoriesList
 } from "@/shared";
 
-import styles from "./AdminUsers.module.scss";
+import styles from "./AdminCategories.module.scss";
 
-const AdminUsers = () => {
+const AdminCategories = () => {
     const [activePage, setActivePage] = useState<number>(1);
     const [perPage, setPerPage] = useState<number>(15);
     const [search, setSearch] = useState<string>("");
@@ -24,7 +24,7 @@ const AdminUsers = () => {
 
     const handleSelectAll = (isChecked: boolean) => {
         if (isChecked) {
-            setSelectedItems(UsersList.map((item) => item.id));
+            setSelectedItems(CategoriesList.map((item) => item.id));
         } else {
             setSelectedItems([]);
         }
@@ -44,7 +44,7 @@ const AdminUsers = () => {
         <section className={styles.admin}>
             <div className="container">
                 <div className={styles.admin__inner}>
-                    <h2 className={styles.admin__title}>Users</h2>
+                    <h2 className={styles.admin__title}>Categories</h2>
                     <div className={styles.admin__row}>
                         <div className={styles.admin__search}>
                             <SearchInput onChange={setSearch} />
@@ -54,15 +54,16 @@ const AdminUsers = () => {
                                 <GroupActionsSelect
                                     value={groupAction}
                                     onChange={setGroupAction}
-                                    options={UsersGroupActionsList}
+                                    options={CategoriesGroupActionsList}
                                     onSubmit={handleApplyGroupAction}
                                 />
                             </div>
                             <Button
                                 leftIcon={
-                                    <UserRoundPlus
+                                    <ListPlus
                                         size={20}
                                         strokeWidth={1.5}
+                                        absoluteStrokeWidth
                                     />
                                 }
                             >
@@ -71,8 +72,8 @@ const AdminUsers = () => {
                         </div>
                     </div>
                     <div className={styles.admin__table}>
-                        <AdminUsersTable
-                            data={UsersList}
+                        <AdminCategoriesTable
+                            data={CategoriesList}
                             selectedItems={selectedItems}
                             onSelect={handleSelectItem}
                             onSelectAll={handleSelectAll}
@@ -94,4 +95,4 @@ const AdminUsers = () => {
     );
 };
 
-export default AdminUsers;
+export default AdminCategories;
