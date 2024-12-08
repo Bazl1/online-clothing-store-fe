@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ListPlus } from "lucide-react";
 
-import { AdminCategoriesTable } from "@/widgets";
+import { AdminCategoriesCreatePopup, AdminCategoriesTable } from "@/widgets";
 import { GroupActionsSelect, SearchInput } from "@/components";
 import { Button, Pagination } from "@/ui";
 
@@ -16,6 +16,7 @@ import {
 import styles from "./AdminCategories.module.scss";
 
 const AdminCategories = () => {
+    const [isCreatePopupOpen, setIsCreatePopupOpen] = useState<boolean>(false);
     const [activePage, setActivePage] = useState<number>(1);
     const [perPage, setPerPage] = useState<number>(15);
     const [search, setSearch] = useState<string>("");
@@ -40,58 +41,72 @@ const AdminCategories = () => {
         // TODO: RHF for group action
     };
 
+    const handleCreatePopupOpen = () => {
+        setIsCreatePopupOpen(true);
+    };
+
+    const handleCreatePopupClose = () => {
+        setIsCreatePopupOpen(false);
+    };
+
     return (
-        <section className={styles.admin}>
-            <div className="container">
-                <div className={styles.admin__inner}>
-                    <h2 className={styles.admin__title}>Categories</h2>
-                    <div className={styles.admin__row}>
-                        <div className={styles.admin__search}>
-                            <SearchInput onChange={setSearch} />
-                        </div>
-                        <div className={styles.admin__actions}>
-                            <div className={styles.admin__actions_select}>
-                                <GroupActionsSelect
-                                    value={groupAction}
-                                    onChange={setGroupAction}
-                                    options={CategoriesGroupActionsList}
-                                    onSubmit={handleApplyGroupAction}
-                                />
+        <>
+            <section className={styles.admin}>
+                <div className="container">
+                    <div className={styles.admin__inner}>
+                        <h2 className={styles.admin__title}>Categories</h2>
+                        <div className={styles.admin__row}>
+                            <div className={styles.admin__search}>
+                                <SearchInput onChange={setSearch} />
                             </div>
-                            <Button
-                                leftIcon={
-                                    <ListPlus
-                                        size={20}
-                                        strokeWidth={1.5}
-                                        absoluteStrokeWidth
+                            <div className={styles.admin__actions}>
+                                <div className={styles.admin__actions_select}>
+                                    <GroupActionsSelect
+                                        value={groupAction}
+                                        onChange={setGroupAction}
+                                        options={CategoriesGroupActionsList}
+                                        onSubmit={handleApplyGroupAction}
                                     />
-                                }
-                            >
-                                Create
-                            </Button>
+                                </div>
+                                <Button
+                                    leftIcon={
+                                        <ListPlus
+                                            size={20}
+                                            strokeWidth={1.5}
+                                            absoluteStrokeWidth
+                                        />
+                                    }
+                                    onClick={handleCreatePopupOpen}
+                                >
+                                    Create
+                                </Button>
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.admin__table}>
-                        <AdminCategoriesTable
-                            data={CategoriesList}
-                            selectedItems={selectedItems}
-                            onSelect={handleSelectItem}
-                            onSelectAll={handleSelectAll}
-                        />
-                    </div>
-                    <div className={styles.admin__pagination}>
-                        <Pagination
-                            currentPage={activePage}
-                            onChange={setActivePage}
-                            perPage={perPage}
-                            onChangePerPage={setPerPage}
-                            limitsList={PaginationLimitsList}
-                            totalItems={1000}
-                        />
+                        <div className={styles.admin__table}>
+                            <AdminCategoriesTable
+                                data={CategoriesList}
+                                selectedItems={selectedItems}
+                                onSelect={handleSelectItem}
+                                onSelectAll={handleSelectAll}
+                            />
+                        </div>
+                        <div className={styles.admin__pagination}>
+                            <Pagination
+                                currentPage={activePage}
+                                onChange={setActivePage}
+                                perPage={perPage}
+                                onChangePerPage={setPerPage}
+                                limitsList={PaginationLimitsList}
+                                totalItems={1000}
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            {isCreatePopupOpen ? (
+                <AdminCategoriesCreatePopup onClose={handleCreatePopupClose} />
+            ) : null}
+        </>
     );
 };
 
