@@ -15,7 +15,7 @@ import styles from "./AdminUsersEditPopup.module.scss";
 
 const AdminUsersEditPopup = ({
     user,
-    handleChangeOpen
+    changeOpen
 }: AdminUsersEditPopupProps) => {
     const {
         handleSubmit,
@@ -45,12 +45,12 @@ const AdminUsersEditPopup = ({
         onSuccess: () => {
             toast.success("User has been changed successfully");
             queryClient.invalidateQueries({ queryKey: ["users"] });
-            handleChangeOpen(false);
+            changeOpen(false);
         }
     });
 
-    const handleOnClose = () => {
-        handleChangeOpen(false);
+    const handleClose = () => {
+        changeOpen(false);
     };
 
     const onSubmit = (data: AdminUsersPopupInputs) => {
@@ -77,7 +77,7 @@ const AdminUsersEditPopup = ({
     };
 
     return (
-        <Popup onClose={handleOnClose}>
+        <Popup onClose={handleClose}>
             <div className={styles.popup}>
                 <h3 className={styles.popup__title}>Edit user</h3>
                 <form

@@ -61,7 +61,7 @@ const AdminUsersTableRow = ({
             {isEditPopupOpen ? (
                 <AdminUsersEditPopup
                     user={row.original}
-                    handleChangeOpen={setIsEditPopupOpen}
+                    changeOpen={setIsEditPopupOpen}
                 />
             ) : null}
         </>

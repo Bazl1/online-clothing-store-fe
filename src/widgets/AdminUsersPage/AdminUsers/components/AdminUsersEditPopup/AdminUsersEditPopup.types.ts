@@ -4,5 +4,5 @@ import { IUser } from "@/shared";
 
 export interface AdminUsersEditPopupProps {
     user: IUser;
-    handleChangeOpen: Dispatch<SetStateAction<boolean>>;
+    changeOpen: Dispatch<SetStateAction<boolean>>;
 }

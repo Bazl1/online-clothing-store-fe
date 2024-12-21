@@ -59,7 +59,12 @@ const AdminCategoriesTableRow = ({
                     />
                 </div>
             </div>
-            {isEditPopupOpen ? <AdminCategoriesEditPopup /> : null}
+            {isEditPopupOpen ? (
+                <AdminCategoriesEditPopup
+                    category={row.original}
+                    changeOpen={setIsEditPopupOpen}
+                />
+            ) : null}
         </>
     );
 };

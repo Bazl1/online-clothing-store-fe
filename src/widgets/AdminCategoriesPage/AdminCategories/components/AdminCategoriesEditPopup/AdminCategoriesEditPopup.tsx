@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
+import { Upload } from "lucide-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button, Dropzone, FormField, Input, Popup, Switch } from "@/ui";
@@ -10,11 +11,10 @@ import { Button, Dropzone, FormField, Input, Popup, Switch } from "@/ui";
 import { AdminCategoriesEditPopupProsp } from "./AdminCategoriesEditPopup.types";
 
 import styles from "./AdminCategoriesEditPopup.module.scss";
-import { Upload } from "lucide-react";
 
 const AdminCategoriesEditPopup = ({
     category,
-    onClose
+    changeOpen
 }: AdminCategoriesEditPopupProsp) => {
     const {
         handleSubmit,
@@ -22,16 +22,17 @@ const AdminCategoriesEditPopup = ({
         watch,
         control,
         formState: { errors }
-    } = useForm({
-        resolver: yupResolver(),
-        defaultValues: {}
-    });
+    } = useForm();
 
     const [imgUrl, setImgUrl] = useState<string | null>(null);
 
-    const watchIcon = watch("icon");
+    const handleClose = () => {
+        changeOpen(false);
+    };
 
     const onSubmit = (data: any) => {};
+
+    const watchIcon = watch("icon");
 
     useEffect(() => {
         if (watchIcon && watchIcon.length) {
@@ -41,7 +42,7 @@ const AdminCategoriesEditPopup = ({
     }, [watchIcon]);
 
     return (
-        <Popup onClose={onClose}>
+        <Popup onClose={handleClose}>
             <div className={styles.popup}>
                 <h3 className={styles.popup__title}>Create category</h3>
                 <form
