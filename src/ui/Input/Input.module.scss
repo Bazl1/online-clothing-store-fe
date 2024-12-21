@@ -8,7 +8,7 @@
     background: transparent;
 
     &::placeholder {
-        color: rgba($text-color, 0.5);
+        color: rgba($dark-color, 0.5);
     }
 
     &__sm {
@@ -55,7 +55,7 @@
 
     &__primary,
     &__secondary {
-        color: $text-color;
+        color: $dark-color;
     }
 
     &__row_primary,

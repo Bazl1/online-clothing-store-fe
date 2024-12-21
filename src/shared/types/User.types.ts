@@ -55,3 +55,43 @@ export interface ChangeAddressResponse {
     success: boolean;
     data: IUser;
 }
+
+export interface GetUsersResponse {
+    success: boolean;
+    data: IUser[];
+    page: number;
+    totalPages: number;
+    totalItems: number;
+}
+
+export interface ChangeUserRequest {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber?: string | undefined;
+    state?: string | undefined;
+    country?: string | undefined;
+    city?: string | undefined;
+    street?: string | undefined;
+    house?: string | undefined;
+    flat?: string | undefined;
+    floor?: string | undefined;
+    zip?: string | undefined;
+    password?: string | undefined;
+}
+
+export interface CreateUserRequest {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber?: string | undefined;
+    state?: string | undefined;
+    country?: string | undefined;
+    city?: string | undefined;
+    street?: string | undefined;
+    house?: string | undefined;
+    flat?: string | undefined;
+    floor?: string | undefined;
+    zip?: string | undefined;
+    password?: string | undefined;
+}

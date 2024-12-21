@@ -87,35 +87,17 @@ const ProfileAddressForm = () => {
                             error={errors.flat?.message}
                             {...register("flat")}
                         />
-                        <Controller
-                            name="floor"
-                            control={control}
-                            render={({
-                                field: { onChange, value },
-                                fieldState: { error }
-                            }) => (
-                                <NumberInput
-                                    value={value ?? ""}
-                                    onChange={onChange}
-                                    placeholder="Floor"
-                                    error={error?.message}
-                                />
-                            )}
+                        <Input
+                            type="number"
+                            placeholder="Floor"
+                            error={errors.floor?.message}
+                            {...register("floor")}
                         />
-                        <Controller
-                            name="zip"
-                            control={control}
-                            render={({
-                                field: { onChange, value },
-                                fieldState: { error }
-                            }) => (
-                                <NumberInput
-                                    value={value ?? ""}
-                                    onChange={onChange}
-                                    placeholder="Zip"
-                                    error={error?.message}
-                                />
-                            )}
+                        <Input
+                            type="number"
+                            placeholder="Zip"
+                            error={errors.zip?.message}
+                            {...register("zip")}
                         />
                     </div>
                 </div>

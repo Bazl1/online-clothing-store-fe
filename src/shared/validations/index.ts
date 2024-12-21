@@ -4,3 +4,4 @@ export * from "./ProfilePasswordFormShema";
 export * from "./SignUpFormSchema";
 export * from "./SignInFormSchema";
 export * from "./SearchInputSchema";
+export * from "./AdminUsersPopupSchema";
