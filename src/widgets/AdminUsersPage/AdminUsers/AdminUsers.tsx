@@ -10,11 +10,7 @@ import { GroupActionsSelect, SearchInput } from "@/components";
 import { Button, Pagination } from "@/ui";
 
 import { useDeleteUsers, useGetUsers } from "@/apis";
-import {
-    PaginationLimitsList,
-    UsersGroupActionsList,
-    UsersList
-} from "@/shared";
+import { PaginationLimitsList, UsersGroupActionsList } from "@/shared";
 
 import styles from "./AdminUsers.module.scss";
 

@@ -4,45 +4,34 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Upload } from "lucide-react";
-import { toast } from "react-toastify";
 
 import { Button, Dropzone, FormField, Input, Popup, Switch } from "@/ui";
 
-import {
-    AdminCategoriesCreatePopupinputs,
-    AdminCategoriesCreatePopupSchema
-} from "@/shared";
-import { AdminCategoriesCreatePopupProps } from "./AdminCategoriesCreatePopup.types";
+import { AdminCategoriesEditPopupProsp } from "./AdminCategoriesEditPopup.types";
 
-import styles from "./AdminCategoriesCreatePopup.module.scss";
-import { useCreateCategory } from "@/apis";
-import { useQueryClient } from "@tanstack/react-query";
+import styles from "./AdminCategoriesEditPopup.module.scss";
+import { Upload } from "lucide-react";
 
-const AdminCategoriesCreatePopup = ({
+const AdminCategoriesEditPopup = ({
+    category,
     onClose
-}: AdminCategoriesCreatePopupProps) => {
+}: AdminCategoriesEditPopupProsp) => {
     const {
         handleSubmit,
         register,
         watch,
         control,
         formState: { errors }
-    } = useForm<AdminCategoriesCreatePopupinputs>({
-        resolver: yupResolver(AdminCategoriesCreatePopupSchema)
+    } = useForm({
+        resolver: yupResolver(),
+        defaultValues: {}
     });
 
     const [imgUrl, setImgUrl] = useState<string | null>(null);
 
-    const queryClient = useQueryClient();
-
-    const { mutate: createCategory } = useCreateCategory({});
-
-    const onSubmit = (data: AdminCategoriesCreatePopupinputs) => {
-        const formData = new FormData();
-    };
-
     const watchIcon = watch("icon");
+
+    const onSubmit = (data: any) => {};
 
     useEffect(() => {
         if (watchIcon && watchIcon.length) {
@@ -64,7 +53,6 @@ const AdminCategoriesCreatePopup = ({
                             <Controller
                                 name="icon"
                                 control={control}
-                                defaultValue={[]}
                                 render={({
                                     field: { value, onChange },
                                     fieldState: { error }
@@ -74,7 +62,7 @@ const AdminCategoriesCreatePopup = ({
                                         error={error?.message}
                                     >
                                         <Dropzone
-                                            value={value ?? []}
+                                            value={value}
                                             onChange={onChange}
                                             accept={{
                                                 "image/png": [".png"],
@@ -131,17 +119,14 @@ const AdminCategoriesCreatePopup = ({
                                 name="isActive"
                                 control={control}
                                 render={({ field: { value, onChange } }) => (
-                                    <Switch
-                                        value={value ?? false}
-                                        onChange={onChange}
-                                    />
+                                    <Switch value={value} onChange={onChange} />
                                 )}
                             />
                             <p className={styles.popup__switch_text}>Active</p>
                         </div>
                     </div>
                     <Button className={styles.popup__btn} type="submit">
-                        Create
+                        Edit
                     </Button>
                 </form>
             </div>
@@ -149,4 +134,4 @@ const AdminCategoriesCreatePopup = ({
     );
 };
 
-export default AdminCategoriesCreatePopup;
+export default AdminCategoriesEditPopup;

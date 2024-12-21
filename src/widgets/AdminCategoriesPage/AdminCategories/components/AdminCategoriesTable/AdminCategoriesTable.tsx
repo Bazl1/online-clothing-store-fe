@@ -8,7 +8,7 @@ import {
     useReactTable
 } from "@tanstack/react-table";
 
-import { AdminCategoriesDots } from "@/widgets";
+import { AdminCategoriesTableRow } from "@/widgets";
 import { Checkbox } from "@/ui";
 
 import { ICategory, useMounted } from "@/shared";
@@ -37,7 +37,8 @@ const AdminCategoriesTable = ({
     data,
     selectedItems,
     onSelect,
-    onSelectAll
+    onSelectAll,
+    onDelete
 }: AdminCategoriesTableProps) => {
     const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
 
@@ -94,45 +95,13 @@ const AdminCategoriesTable = ({
             </div>
             <div className={styles.table__body}>
                 {table.getRowModel().rows.map((row) => (
-                    <div key={row.id} className={styles.table__body_item}>
-                        <div className={styles.table__body_checkbox}>
-                            <Checkbox
-                                checked={selectedItems.includes(
-                                    row.original.id
-                                )}
-                                onChange={(e) =>
-                                    handleSelectItem(
-                                        e.target.checked,
-                                        row.original.id
-                                    )
-                                }
-                            />
-                        </div>
-
-                        <div key={row.id} className={styles.table__body_row}>
-                            {row.getVisibleCells().map((cell) => (
-                                <div
-                                    key={cell.id}
-                                    className={styles.table__body_value}
-                                >
-                                    <p
-                                        className={
-                                            styles.table__body_value_text
-                                        }
-                                    >
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <div className={styles.table__body_dots}>
-                            <AdminCategoriesDots />
-                        </div>
-                    </div>
+                    <AdminCategoriesTableRow
+                        key={row.original.id}
+                        row={row}
+                        selectedItems={selectedItems}
+                        handleSelectItem={handleSelectItem}
+                        onDelete={onDelete}
+                    />
                 ))}
             </div>
         </div>

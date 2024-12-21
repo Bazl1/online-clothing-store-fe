@@ -4,7 +4,7 @@ import {
     UseMutationResult
 } from "@tanstack/react-query";
 
-import { UsersService } from "@/services";
+import { UserService } from "@/services";
 import { ChangeUserRequest } from "@/shared";
 
 const useChangeUser = (
@@ -15,7 +15,7 @@ const useChangeUser = (
     >
 ): UseMutationResult<void, Error, { id: string; data: ChangeUserRequest }> => {
     return useMutation({
-        mutationFn: ({ id, data }) => UsersService.changeUser(id, data),
+        mutationFn: ({ id, data }) => UserService.changeUser(id, data),
         ...options
     });
 };

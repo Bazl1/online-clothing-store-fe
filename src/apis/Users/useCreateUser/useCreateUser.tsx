@@ -4,14 +4,14 @@ import {
     UseMutationResult
 } from "@tanstack/react-query";
 
-import { UsersService } from "@/services";
+import { UserService } from "@/services";
 import { CreateUserRequest } from "@/shared";
 
 const useCreateUser = (
     options?: UseMutationOptions<void, Error, CreateUserRequest>
 ): UseMutationResult<void, Error, CreateUserRequest> => {
     return useMutation({
-        mutationFn: (data) => UsersService.createUser(data),
+        mutationFn: (data) => UserService.createUser(data),
         ...options
     });
 };

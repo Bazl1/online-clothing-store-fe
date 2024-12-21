@@ -4,15 +4,15 @@ import {
     UseMutationResult
 } from "@tanstack/react-query";
 
-import { UserService } from "@/services";
+import { CategoryService } from "@/services";
 
-const useDeleteUsers = (
+const useDeleteCategories = (
     options?: UseMutationOptions<void, Error, string[]>
 ): UseMutationResult<void, Error, string[]> => {
     return useMutation({
-        mutationFn: (ids) => UserService.deleteUsers(ids),
+        mutationFn: (ids) => CategoryService.deleteCategory(ids),
         ...options
     });
 };
 
-export default useDeleteUsers;
+export default useDeleteCategories;

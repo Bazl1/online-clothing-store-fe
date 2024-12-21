@@ -5,3 +5,4 @@ export * from "./SignUpFormSchema";
 export * from "./SignInFormSchema";
 export * from "./SearchInputSchema";
 export * from "./AdminUsersPopupSchema";
+export * from "./AdminCategoriesCreatePopupSchema";

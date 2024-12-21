@@ -6,10 +6,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
 
 import { FadeInDown, useOnClickOutside } from "@/shared";
+import { AdminCategoriesDotsProps } from "./AdminCategoriesDots.types";
 
 import styles from "./AdminCategoriesDots.module.scss";
 
-const AdminCategoriesDots = () => {
+const AdminCategoriesDots = ({
+    isActive,
+    handleDelete,
+    handleEditOpen
+}: AdminCategoriesDotsProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const dotsRef = useRef<HTMLDivElement | null>(null);
@@ -42,13 +47,25 @@ const AdminCategoriesDots = () => {
                         exit={FadeInDown.exit}
                         className={styles.dots__options}
                     >
-                        <button className={styles.dots__btn}>Edit</button>
-                        <button className={styles.dots__btn}>Disable</button>
+                        <button
+                            className={styles.dots__btn}
+                            onClick={handleEditOpen}
+                        >
+                            Edit
+                        </button>
+                        {isActive ? (
+                            <button className={styles.dots__btn}>
+                                Disable
+                            </button>
+                        ) : (
+                            <button className={styles.dots__btn}>Enable</button>
+                        )}
                         <button
                             className={cn(
                                 styles.dots__btn,
                                 styles.dots__btn_red
                             )}
+                            onClick={handleDelete}
                         >
                             Delete
                         </button>

@@ -2,32 +2,47 @@
 
 import { useState } from "react";
 import { ListPlus } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import { AdminCategoriesCreatePopup, AdminCategoriesTable } from "@/widgets";
 import { GroupActionsSelect, SearchInput } from "@/components";
 import { Button, Pagination } from "@/ui";
 
-import {
-    PaginationLimitsList,
-    CategoriesGroupActionsList,
-    CategoriesList
-} from "@/shared";
+import { useDeleteCategories, useGetCategories } from "@/apis";
+import { PaginationLimitsList, CategoriesGroupActionsList } from "@/shared";
 
 import styles from "./AdminCategories.module.scss";
 
 const AdminCategories = () => {
     const [isCreatePopupOpen, setIsCreatePopupOpen] = useState<boolean>(false);
     const [activePage, setActivePage] = useState<number>(1);
-    const [perPage, setPerPage] = useState<number>(15);
+    const [perPage, setPerPage] = useState<number>(PaginationLimitsList[0]);
     const [search, setSearch] = useState<string>("");
-    const [groupAction, setGroupAction] = useState<string>("delete");
+    const [groupAction, setGroupAction] = useState<string>(
+        CategoriesGroupActionsList[0].value
+    );
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
+    const queryClient = useQueryClient();
+
+    const { data: categoriesData, isLoading: categoriesIsLoading } =
+        useGetCategories(activePage, perPage, search);
+
+    const { mutate: deleteCategories } = useDeleteCategories({
+        onSuccess: () => {
+            toast.success("Category deleted successfully");
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+        }
+    });
+
     const handleSelectAll = (isChecked: boolean) => {
-        if (isChecked) {
-            setSelectedItems(CategoriesList.map((item) => item.id));
-        } else {
-            setSelectedItems([]);
+        if (categoriesData) {
+            if (isChecked) {
+                setSelectedItems(categoriesData?.data.map((item) => item.id));
+            } else {
+                setSelectedItems([]);
+            }
         }
     };
 
@@ -38,7 +53,11 @@ const AdminCategories = () => {
     };
 
     const handleApplyGroupAction = () => {
-        // TODO: RHF for group action
+        if (groupAction === "delete") {
+            deleteCategories(selectedItems);
+        } else if (groupAction === "active") {
+        } else if (groupAction === "disable") {
+        }
     };
 
     const handleCreatePopupOpen = () => {
@@ -82,24 +101,31 @@ const AdminCategories = () => {
                                 </Button>
                             </div>
                         </div>
-                        <div className={styles.admin__table}>
-                            <AdminCategoriesTable
-                                data={CategoriesList}
-                                selectedItems={selectedItems}
-                                onSelect={handleSelectItem}
-                                onSelectAll={handleSelectAll}
-                            />
-                        </div>
-                        <div className={styles.admin__pagination}>
-                            <Pagination
-                                currentPage={activePage}
-                                onChange={setActivePage}
-                                perPage={perPage}
-                                onChangePerPage={setPerPage}
-                                limitsList={PaginationLimitsList}
-                                totalItems={1000}
-                            />
-                        </div>
+                        {!categoriesIsLoading ? (
+                            <>
+                                <div className={styles.admin__table}>
+                                    <AdminCategoriesTable
+                                        data={categoriesData?.data || []}
+                                        selectedItems={selectedItems}
+                                        onSelect={handleSelectItem}
+                                        onSelectAll={handleSelectAll}
+                                        onDelete={deleteCategories}
+                                    />
+                                </div>
+                                <div className={styles.admin__pagination}>
+                                    <Pagination
+                                        currentPage={activePage}
+                                        onChange={setActivePage}
+                                        perPage={perPage}
+                                        onChangePerPage={setPerPage}
+                                        limitsList={PaginationLimitsList}
+                                        totalItems={
+                                            categoriesData?.totalItems || 0
+                                        }
+                                    />
+                                </div>
+                            </>
+                        ) : null}
                     </div>
                 </div>
             </section>
