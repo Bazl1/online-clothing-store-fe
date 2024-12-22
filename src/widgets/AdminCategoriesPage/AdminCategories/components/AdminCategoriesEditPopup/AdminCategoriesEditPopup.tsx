@@ -8,13 +8,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Button, Dropzone, FormField, Input, Popup, Switch } from "@/ui";
 
+import {
+    AdminCategoriesEditPopupInputs,
+    AdminCategoriesEditPopupSchema
+} from "@/shared";
 import { AdminCategoriesEditPopupProsp } from "./AdminCategoriesEditPopup.types";
 
 import styles from "./AdminCategoriesEditPopup.module.scss";
 
 const AdminCategoriesEditPopup = ({
     category,
-    changeOpen
+    onClose
 }: AdminCategoriesEditPopupProsp) => {
     const {
         handleSubmit,
@@ -22,15 +26,14 @@ const AdminCategoriesEditPopup = ({
         watch,
         control,
         formState: { errors }
-    } = useForm();
+    } = useForm<AdminCategoriesEditPopupInputs>({
+        resolver: yupResolver(AdminCategoriesEditPopupSchema),
+        defaultValues: {}
+    });
 
     const [imgUrl, setImgUrl] = useState<string | null>(null);
 
-    const handleClose = () => {
-        changeOpen(false);
-    };
-
-    const onSubmit = (data: any) => {};
+    const onSubmit = (data: AdminCategoriesEditPopupInputs) => {};
 
     const watchIcon = watch("icon");
 
@@ -42,7 +45,7 @@ const AdminCategoriesEditPopup = ({
     }, [watchIcon]);
 
     return (
-        <Popup onClose={handleClose}>
+        <Popup onClose={onClose}>
             <div className={styles.popup}>
                 <h3 className={styles.popup__title}>Create category</h3>
                 <form

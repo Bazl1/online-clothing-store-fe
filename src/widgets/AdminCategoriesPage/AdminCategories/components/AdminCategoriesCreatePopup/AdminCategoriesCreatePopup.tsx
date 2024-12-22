@@ -36,10 +36,26 @@ const AdminCategoriesCreatePopup = ({
 
     const queryClient = useQueryClient();
 
-    const { mutate: createCategory } = useCreateCategory({});
+    const { mutate: createCategory } = useCreateCategory({
+        onSuccess: () => {
+            toast.success("Category created successfully");
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+            onClose();
+        }
+    });
 
     const onSubmit = (data: AdminCategoriesCreatePopupinputs) => {
         const formData = new FormData();
+
+        formData.append("icon", data.icon[0]);
+        formData.append("title", data.title);
+        formData.append("description", data.description);
+        formData.append(
+            "isActive",
+            data.isActive ? data.isActive.toString() : "false"
+        );
+
+        createCategory(formData);
     };
 
     const watchIcon = watch("icon");
@@ -130,6 +146,7 @@ const AdminCategoriesCreatePopup = ({
                             <Controller
                                 name="isActive"
                                 control={control}
+                                defaultValue={false}
                                 render={({ field: { value, onChange } }) => (
                                     <Switch
                                         value={value ?? false}

@@ -13,9 +13,7 @@ import { AdminUsersCreatePopupProps } from "./AdminUsersCreatePopup.types";
 
 import styles from "./AdminUsersCreatePopup.module.scss";
 
-const AdminUsersCreatePopup = ({
-    handleChangeOpen
-}: AdminUsersCreatePopupProps) => {
+const AdminUsersCreatePopup = ({ onClose }: AdminUsersCreatePopupProps) => {
     const {
         handleSubmit,
         register,
@@ -30,13 +28,9 @@ const AdminUsersCreatePopup = ({
         onSuccess: () => {
             toast.success("User created successfully");
             queryClient.invalidateQueries({ queryKey: ["users"] });
-            handleChangeOpen(false);
+            onClose();
         }
     });
-
-    const handleOnClose = () => {
-        handleChangeOpen(false);
-    };
 
     const onSubmit = (data: AdminUsersPopupInputs) => {
         const requestData = {
@@ -59,7 +53,7 @@ const AdminUsersCreatePopup = ({
     };
 
     return (
-        <Popup onClose={handleOnClose}>
+        <Popup onClose={onClose}>
             <div className={styles.popup}>
                 <h3 className={styles.popup__title}>Create new user</h3>
                 <form

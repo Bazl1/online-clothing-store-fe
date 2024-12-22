@@ -65,6 +65,10 @@ const AdminUsers = () => {
         setIsCreatePopupOpen(true);
     };
 
+    const handleCreatePopupClose = () => {
+        setIsCreatePopupOpen(false);
+    };
+
     return (
         <>
             <section className={styles.admin}>
@@ -124,9 +128,7 @@ const AdminUsers = () => {
                 </div>
             </section>
             {isCreatePopupOpen ? (
-                <AdminUsersCreatePopup
-                    handleChangeOpen={setIsCreatePopupOpen}
-                />
+                <AdminUsersCreatePopup onClose={handleCreatePopupClose} />
             ) : null}
         </>
     );

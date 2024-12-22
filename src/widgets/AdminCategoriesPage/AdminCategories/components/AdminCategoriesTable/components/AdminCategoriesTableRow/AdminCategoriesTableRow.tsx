@@ -22,6 +22,10 @@ const AdminCategoriesTableRow = ({
         setIsEditPopupOpen(true);
     };
 
+    const handleEditPopupClose = () => {
+        setIsEditPopupOpen(false);
+    };
+
     const handleDeleteCategory = () => {
         onDelete([row.original.id]);
     };
@@ -62,7 +66,7 @@ const AdminCategoriesTableRow = ({
             {isEditPopupOpen ? (
                 <AdminCategoriesEditPopup
                     category={row.original}
-                    changeOpen={setIsEditPopupOpen}
+                    onClose={handleEditPopupClose}
                 />
             ) : null}
         </>

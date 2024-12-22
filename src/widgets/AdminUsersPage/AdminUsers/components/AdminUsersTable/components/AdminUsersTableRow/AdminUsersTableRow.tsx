@@ -22,6 +22,10 @@ const AdminUsersTableRow = ({
         setIsEditPopupOpen(true);
     };
 
+    const handleEditPopupClose = () => {
+        setIsEditPopupOpen(false);
+    };
+
     const handleDelete = () => {
         onDelete([row.original.id]);
     };
@@ -61,7 +65,7 @@ const AdminUsersTableRow = ({
             {isEditPopupOpen ? (
                 <AdminUsersEditPopup
                     user={row.original}
-                    changeOpen={setIsEditPopupOpen}
+                    onClose={handleEditPopupClose}
                 />
             ) : null}
         </>

@@ -5,7 +5,8 @@ import { REQUIRED_FIELD } from "@/shared";
 export const AdminCategoriesCreatePopupSchema = yup.object({
     icon: yup
         .array()
-        .transform((value) => (value.lenght > 0 ? value : null))
+        .nullable()
+        .transform((value) => (value.length > 0 ? value : null))
         .required(REQUIRED_FIELD),
     title: yup.string().trim().required(REQUIRED_FIELD),
     description: yup.string().trim().required(REQUIRED_FIELD),
