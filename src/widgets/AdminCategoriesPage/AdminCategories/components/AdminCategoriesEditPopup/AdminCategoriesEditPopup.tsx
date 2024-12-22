@@ -26,14 +26,13 @@ const AdminCategoriesEditPopup = ({
         watch,
         control,
         formState: { errors }
-    } = useForm<AdminCategoriesEditPopupInputs>({
-        resolver: yupResolver(AdminCategoriesEditPopupSchema),
-        defaultValues: {}
-    });
+    } = useForm<any>();
+    // resolver: yupResolver(AdminCategoriesEditPopupSchema),
+    // defaultValues: {}
 
     const [imgUrl, setImgUrl] = useState<string | null>(null);
 
-    const onSubmit = (data: AdminCategoriesEditPopupInputs) => {};
+    const onSubmit = (data: any) => {};
 
     const watchIcon = watch("icon");
 
