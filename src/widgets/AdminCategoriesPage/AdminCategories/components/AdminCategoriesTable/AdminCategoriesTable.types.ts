@@ -4,4 +4,5 @@ export interface AdminCategoriesTableProps {
     onSelect: (isChecked: boolean, id: string) => void;
     onSelectAll: (isChecked: boolean) => void;
     onDelete: (ids: string[]) => void;
+    onToggle: ({ ids, isActive }: { ids: string[]; isActive: boolean }) => void;
 }

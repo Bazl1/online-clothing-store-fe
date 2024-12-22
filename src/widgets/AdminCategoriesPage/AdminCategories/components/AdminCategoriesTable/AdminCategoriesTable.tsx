@@ -38,7 +38,8 @@ const AdminCategoriesTable = ({
     selectedItems,
     onSelect,
     onSelectAll,
-    onDelete
+    onDelete,
+    onToggle
 }: AdminCategoriesTableProps) => {
     const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
 
@@ -101,6 +102,7 @@ const AdminCategoriesTable = ({
                         selectedItems={selectedItems}
                         handleSelectItem={handleSelectItem}
                         onDelete={onDelete}
+                        onToggle={onToggle}
                     />
                 ))}
             </div>

@@ -24,4 +24,14 @@ export default class CategoryService {
             ids: ids
         });
     };
+
+    static toggleCategories = (
+        ids: string[],
+        isActive: boolean
+    ): Promise<void> => {
+        return instance.patch("categories/toggle-enabled", {
+            ids: ids,
+            isActive: isActive
+        });
+    };
 }

@@ -13,25 +13,26 @@ import styles from "./AdminCategoriesDots.module.scss";
 const AdminCategoriesDots = ({
     isActive,
     handleDelete,
-    handleEditOpen
+    handleEditOpen,
+    handleToggle
 }: AdminCategoriesDotsProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const dotsRef = useRef<HTMLDivElement | null>(null);
 
-    const handleToggle = () => {
+    const handleTogglePopup = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleClose = () => {
+    const handleClosePopup = () => {
         setIsOpen(false);
     };
 
-    useOnClickOutside(dotsRef, handleClose);
+    useOnClickOutside(dotsRef, handleClosePopup);
 
     return (
         <div ref={dotsRef} className={styles.dots}>
-            <div className={styles.dots__icon} onClick={handleToggle}>
+            <div className={styles.dots__icon} onClick={handleTogglePopup}>
                 <EllipsisVertical
                     size={20}
                     strokeWidth={1.5}
@@ -53,13 +54,12 @@ const AdminCategoriesDots = ({
                         >
                             Edit
                         </button>
-                        {isActive ? (
-                            <button className={styles.dots__btn}>
-                                Disable
-                            </button>
-                        ) : (
-                            <button className={styles.dots__btn}>Enable</button>
-                        )}
+                        <button
+                            className={styles.dots__btn}
+                            onClick={handleToggle}
+                        >
+                            {isActive ? "Disable" : "Enable"}
+                        </button>
                         <button
                             className={cn(
                                 styles.dots__btn,

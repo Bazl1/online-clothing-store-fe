@@ -9,8 +9,16 @@ import { AdminCategoriesCreatePopup, AdminCategoriesTable } from "@/widgets";
 import { GroupActionsSelect, SearchInput } from "@/components";
 import { Button, Pagination } from "@/ui";
 
-import { useDeleteCategories, useGetCategories } from "@/apis";
-import { PaginationLimitsList, CategoriesGroupActionsList } from "@/shared";
+import {
+    useDeleteCategories,
+    useGetCategories,
+    useToggleCategories
+} from "@/apis";
+import {
+    PaginationLimitsList,
+    CategoriesGroupActionsList,
+    SUCCESS_MESSAGE
+} from "@/shared";
 
 import styles from "./AdminCategories.module.scss";
 
@@ -35,6 +43,12 @@ const AdminCategories = () => {
             queryClient.invalidateQueries({ queryKey: ["categories"] });
         }
     });
+    const { mutate: toggleCategories } = useToggleCategories({
+        onSuccess: () => {
+            toast.success(SUCCESS_MESSAGE);
+            queryClient.invalidateQueries({ queryKey: ["categories"] });
+        }
+    });
 
     const handleSelectAll = (isChecked: boolean) => {
         if (categoriesData) {
@@ -56,7 +70,9 @@ const AdminCategories = () => {
         if (groupAction === "delete") {
             deleteCategories(selectedItems);
         } else if (groupAction === "active") {
+            toggleCategories({ ids: selectedItems, isActive: true });
         } else if (groupAction === "disable") {
+            toggleCategories({ ids: selectedItems, isActive: false });
         }
     };
 
@@ -110,6 +126,7 @@ const AdminCategories = () => {
                                         onSelect={handleSelectItem}
                                         onSelectAll={handleSelectAll}
                                         onDelete={deleteCategories}
+                                        onToggle={toggleCategories}
                                     />
                                 </div>
                                 <div className={styles.admin__pagination}>

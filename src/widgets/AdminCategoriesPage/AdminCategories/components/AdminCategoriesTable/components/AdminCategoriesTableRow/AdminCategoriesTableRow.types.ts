@@ -7,4 +7,5 @@ export interface AdminCategoriesTableRowProps {
     selectedItems: string[];
     handleSelectItem: (isChecked: boolean, id: string) => void;
     onDelete: (ids: string[]) => void;
+    onToggle: ({ ids, isActive }: { ids: string[]; isActive: boolean }) => void;
 }

@@ -14,7 +14,8 @@ const AdminCategoriesTableRow = ({
     row,
     selectedItems,
     handleSelectItem,
-    onDelete
+    onDelete,
+    onToggle
 }: AdminCategoriesTableRowProps) => {
     const [isEditPopupOpen, setIsEditPopupOpen] = useState<boolean>(false);
 
@@ -28,6 +29,10 @@ const AdminCategoriesTableRow = ({
 
     const handleDeleteCategory = () => {
         onDelete([row.original.id]);
+    };
+
+    const handleToggleCategory = () => {
+        onToggle({ ids: [row.original.id], isActive: !row.original.isActive });
     };
 
     return (
@@ -60,6 +65,7 @@ const AdminCategoriesTableRow = ({
                         isActive={row.original.isActive}
                         handleEditOpen={handleEditPopupOpen}
                         handleDelete={handleDeleteCategory}
+                        handleToggle={handleToggleCategory}
                     />
                 </div>
             </div>
