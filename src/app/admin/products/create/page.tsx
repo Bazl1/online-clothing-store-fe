@@ -1,9 +1,9 @@
-import { AdminProducts } from "@/widgets";
+import { AdminCreateProduct } from "@/widgets";
 
 const page = () => {
     return (
         <>
-            <AdminProducts />
+            <AdminCreateProduct />
         </>
     );
 };

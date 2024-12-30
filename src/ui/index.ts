@@ -9,3 +9,4 @@ export * from "./Checkbox";
 export * from "./Popup";
 export * from "./Switch";
 export * from "./Dropzone";
+export * from "./Textarea";

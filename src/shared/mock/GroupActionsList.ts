@@ -19,3 +19,18 @@ export const CategoriesGroupActionsList = [
         label: "Disable"
     }
 ];
+
+export const ProductsGroupActionsList = [
+    {
+        value: "delete",
+        label: "Delete"
+    },
+    {
+        value: "active",
+        label: "Active"
+    },
+    {
+        value: "disable",
+        label: "Disable"
+    }
+];

@@ -5,3 +5,5 @@ export * from "./ProfilePage";
 export * from "./AdminUsersPage";
 export * from "./AdminCategoriesPage";
 export * from "./HomePage";
+export * from "./AdminProductsPage";
+export * from "./AdminCreateProductPage";

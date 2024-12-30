@@ -28,7 +28,7 @@ const Dropzone = forwardRef(
                 if (value.length + acceptedFiles.length <= maxFiles) {
                     onChange([...value, ...acceptedFiles]);
                 } else {
-                    toast.success("You can't upload more files");
+                    toast.error("You can't upload more files");
                 }
             }
         };

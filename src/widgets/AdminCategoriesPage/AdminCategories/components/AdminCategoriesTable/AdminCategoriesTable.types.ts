@@ -1,5 +1,7 @@
+import { ICategory } from "@/shared";
+
 export interface AdminCategoriesTableProps {
-    data: any[];
+    data: ICategory[];
     selectedItems: string[];
     onSelect: (isChecked: boolean, id: string) => void;
     onSelectAll: (isChecked: boolean) => void;

@@ -71,3 +71,18 @@ export const CategoriesList = [
         description: "Test1,"
     }
 ];
+
+export const ProductsList = [
+    {
+        id: "1",
+        title: "Test1",
+        category: "Test1",
+        isActive: true
+    },
+    {
+        id: "2",
+        title: "Test1",
+        category: "Test1",
+        isActive: true
+    }
+];

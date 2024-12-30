@@ -1,10 +1,10 @@
 "use client";
 
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast } from "react-toastify";
 
-import { Button, Input, NumberInput } from "@/ui";
+import { Button, Input } from "@/ui";
 
 import { useChangeAddress } from "@/apis";
 import { useAuthStore } from "@/store";
@@ -19,7 +19,6 @@ const ProfileAddressForm = () => {
     const {
         handleSubmit,
         register,
-        control,
         formState: { errors }
     } = useForm<ProfileAddressFormInputs>({
         resolver: yupResolver(ProfileAddressFormShema),

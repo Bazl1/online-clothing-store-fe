@@ -29,7 +29,7 @@ export default class CategoryService {
         ids: string[],
         isActive: boolean
     ): Promise<void> => {
-        return instance.patch("categories/toggle-enabled", {
+        return instance.patch("categories/actions/toggle-enabled", {
             ids: ids,
             isActive: isActive
         });
