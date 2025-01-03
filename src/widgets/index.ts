@@ -7,3 +7,4 @@ export * from "./AdminCategoriesPage";
 export * from "./HomePage";
 export * from "./AdminProductsPage";
 export * from "./AdminCreateProductPage";
+export * from "./AdminEditProductPage";

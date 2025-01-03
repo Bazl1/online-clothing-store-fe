@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import cn from "classnames";
 import { ChevronLeft, ChevronRight, Trash } from "lucide-react";
 
@@ -13,7 +13,6 @@ import { ImageSliderProps, ISlide } from "./ImageSlider.types";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
 import styles from "./ImageSlider.module.scss";
 
 const ImageSlider = ({ slides, onDelete }: ImageSliderProps) => {
@@ -32,7 +31,7 @@ const ImageSlider = ({ slides, onDelete }: ImageSliderProps) => {
                 prevEl: prevRef.current,
                 nextEl: nextRef.current
             }}
-            modules={[Navigation, Pagination]}
+            modules={[Navigation]}
         >
             {slides?.map((slide: ISlide) => (
                 <SwiperSlide key={slide.id} className={styles.slider__slide}>
