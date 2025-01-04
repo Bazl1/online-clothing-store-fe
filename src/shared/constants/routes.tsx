@@ -25,6 +25,7 @@ export const ADMIN_ROUTE = "/admin";
 export const ADMIN_DASHBOARD_ROUTE = "/admin/dashboard";
 export const ADMIN_PRODUCTS_ROUTE = "/admin/products";
 export const ADMIN_CREATE_PRODUCTS_ROUTE = "/admin/products/create";
+export const ADMIN_EDIT_PRODUCTS_ROUTE = "/admin/products/edit";
 export const ADMIN_CATEGORIES_ROUTE = "/admin/categories";
 export const ADMIN_USERS_ROUTE = "/admin/users";
 export const ADMIN_ORDERS_ROUTE = "/admin/orders";

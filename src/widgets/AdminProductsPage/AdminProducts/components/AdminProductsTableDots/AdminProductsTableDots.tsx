@@ -6,10 +6,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import cn from "classnames";
 
 import { FadeInDown, useOnClickOutside } from "@/shared";
+import { AdminProductsTableDotsProps } from "./AdminProductsTableDots.types";
 
 import styles from "./AdminProductsTableDots.module.scss";
 
-const AdminProductsTableDots = () => {
+const AdminProductsTableDots = ({
+    isActive,
+    handleEdit,
+    handleDelete,
+    handleToggle
+}: AdminProductsTableDotsProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
     const dotsRef = useRef<HTMLDivElement | null>(null);
@@ -42,13 +48,24 @@ const AdminProductsTableDots = () => {
                         exit={FadeInDown.exit}
                         className={styles.dots__options}
                     >
-                        <button className={styles.dots__btn}>Edit</button>
-                        <button className={styles.dots__btn}>Enable</button>
+                        <button
+                            className={styles.dots__btn}
+                            onClick={handleEdit}
+                        >
+                            Edit
+                        </button>
+                        <button
+                            className={styles.dots__btn}
+                            onClick={handleToggle}
+                        >
+                            {isActive ? "Deactivate" : "Activate"}
+                        </button>
                         <button
                             className={cn(
                                 styles.dots__btn,
                                 styles.dots__btn_red
                             )}
+                            onClick={handleDelete}
                         >
                             Delete
                         </button>

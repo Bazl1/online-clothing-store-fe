@@ -1,4 +1,8 @@
-import { GetCategoriesResponse, instance } from "@/shared";
+import {
+    GetCategoriesListResponse,
+    GetCategoriesResponse,
+    instance
+} from "@/shared";
 
 export default class CategoryService {
     static getCategories = (
@@ -33,5 +37,9 @@ export default class CategoryService {
             ids: ids,
             isActive: isActive
         });
+    };
+
+    static getCategoriesList = (): Promise<GetCategoriesListResponse> => {
+        return instance.get("categories/list");
     };
 }

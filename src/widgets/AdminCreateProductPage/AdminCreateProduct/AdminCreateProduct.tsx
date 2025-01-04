@@ -1,9 +1,20 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import { AdminCreateProductFiles } from "@/widgets";
 import { Button, Input, Select, Textarea } from "@/ui";
+
+import { useCreateProduct, useGetCategoriesList } from "@/apis";
+import {
+    ADMIN_PRODUCTS_ROUTE,
+    AdminCreateProductInputs,
+    AdminCreateProductSchema
+} from "@/shared";
 
 import styles from "./AdminCreateProduct.module.scss";
 
@@ -13,9 +24,48 @@ const AdminCreateProduct = () => {
         register,
         control,
         formState: { errors }
-    } = useForm();
+    } = useForm<AdminCreateProductInputs>({
+        resolver: yupResolver(AdminCreateProductSchema)
+    });
 
-    const onSubmit = (data: any) => {};
+    const router = useRouter();
+
+    const queryClient = useQueryClient();
+
+    const { data: categoriesData, isLoading: categoriesIsLoading } =
+        useGetCategoriesList();
+
+    const { mutate: createProduct } = useCreateProduct({
+        onSuccess: () => {
+            toast.success("Product created successfully");
+            queryClient.invalidateQueries({ queryKey: ["products"] });
+            router.push(ADMIN_PRODUCTS_ROUTE);
+        }
+    });
+
+    const onSubmit = (data: AdminCreateProductInputs) => {
+        const formData = new FormData();
+
+        formData.append("title", data?.name);
+        formData.append("articul", data?.articul);
+        formData.append("categoryId", data?.category);
+
+        if (data?.description) {
+            formData.append("description", data?.description);
+        }
+
+        formData.append("price", data?.price);
+
+        if (data?.discountPrice) {
+            formData.append("discountPrice", data?.discountPrice);
+        }
+
+        data?.files?.forEach((file) => {
+            formData.append("images", file);
+        });
+
+        createProduct(formData);
+    };
 
     return (
         <section className={styles.admin}>
@@ -54,22 +104,35 @@ const AdminCreateProduct = () => {
                                 error={errors.articul?.message}
                                 {...register("articul")}
                             />
-                            <Controller
-                                name="category"
-                                control={control}
-                                render={({
-                                    field: { onChange, value },
-                                    fieldState: { error }
-                                }) => (
-                                    <Select
-                                        label="Category"
-                                        value={value}
-                                        onChange={onChange}
-                                        options={[]}
-                                        error={error?.message}
-                                    />
-                                )}
-                            />
+                            {!categoriesIsLoading ? (
+                                <Controller
+                                    name="category"
+                                    control={control}
+                                    render={({
+                                        field: { onChange, value },
+                                        fieldState: { error }
+                                    }) => (
+                                        <Select
+                                            label="Category"
+                                            value={value}
+                                            onChange={onChange}
+                                            options={
+                                                categoriesData?.data.map(
+                                                    (category) => {
+                                                        return {
+                                                            value: category.id,
+                                                            label: category.title
+                                                        };
+                                                    }
+                                                ) || []
+                                            }
+                                            error={error?.message}
+                                        />
+                                    )}
+                                />
+                            ) : (
+                                <div className={styles.admin__empty} />
+                            )}
                         </div>
                         <div className={styles.admin__row}>
                             <Input

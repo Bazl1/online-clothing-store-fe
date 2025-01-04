@@ -13,3 +13,8 @@ export interface GetCategoriesResponse {
     totalPages: number;
     totalItems: number;
 }
+
+export interface GetCategoriesListResponse {
+    success: boolean;
+    data: ICategory[];
+}

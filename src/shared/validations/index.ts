@@ -7,3 +7,5 @@ export * from "./SearchInputSchema";
 export * from "./AdminUsersPopupSchema";
 export * from "./AdminCategoriesCreatePopupSchema";
 export * from "./AdminCategoriesEditPopupSchema";
+export * from "./AdminCreateProductSchema";
+export * from "./AdminEditProductSchema";
