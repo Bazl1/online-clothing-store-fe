@@ -1,11 +1,11 @@
-export const UsersGroupActionsList = [
+export const usersGroupActionsList = [
     {
         value: "delete",
         label: "Delete"
     }
 ];
 
-export const CategoriesGroupActionsList = [
+export const categoriesGroupActionsList = [
     {
         value: "delete",
         label: "Delete"
@@ -20,7 +20,7 @@ export const CategoriesGroupActionsList = [
     }
 ];
 
-export const ProductsGroupActionsList = [
+export const productsGroupActionsList = [
     {
         value: "delete",
         label: "Delete"

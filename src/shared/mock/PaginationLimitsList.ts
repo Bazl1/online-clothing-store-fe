@@ -1,1 +1,1 @@
-export const PaginationLimitsList = [10, 15, 30, 50];
+export const paginationLimitsList = [10, 15, 30, 50];

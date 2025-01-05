@@ -10,16 +10,16 @@ import { GroupActionsSelect, SearchInput } from "@/components";
 import { Button, Pagination } from "@/ui";
 
 import { useDeleteUsers, useGetUsers } from "@/apis";
-import { PaginationLimitsList, UsersGroupActionsList } from "@/shared";
+import { paginationLimitsList, usersGroupActionsList } from "@/shared";
 
 import styles from "./AdminUsers.module.scss";
 
 const AdminUsers = () => {
     const [activePage, setActivePage] = useState<number>(1);
-    const [perPage, setPerPage] = useState<number>(PaginationLimitsList[0]);
+    const [perPage, setPerPage] = useState<number>(paginationLimitsList[0]);
     const [search, setSearch] = useState<string>("");
     const [groupAction, setGroupAction] = useState<string>(
-        UsersGroupActionsList[0].value
+        usersGroupActionsList[0].value
     );
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
     const [isCreatePopupOpen, setIsCreatePopupOpen] = useState<boolean>(false);
@@ -84,7 +84,7 @@ const AdminUsers = () => {
                                     <GroupActionsSelect
                                         value={groupAction}
                                         onChange={setGroupAction}
-                                        options={UsersGroupActionsList}
+                                        options={usersGroupActionsList}
                                         onSubmit={handleApplyGroupAction}
                                     />
                                 </div>
@@ -118,7 +118,7 @@ const AdminUsers = () => {
                                         onChange={setActivePage}
                                         perPage={perPage}
                                         onChangePerPage={setPerPage}
-                                        limitsList={PaginationLimitsList}
+                                        limitsList={paginationLimitsList}
                                         totalItems={usersData?.totalItems || 0}
                                     />
                                 </div>

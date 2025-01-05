@@ -61,20 +61,25 @@ const AdminEditProduct = () => {
         formData.append("title", data?.name);
         formData.append("articul", data?.articul);
         formData.append("categoryId", data?.category);
-
-        if (data?.description) {
-            formData.append("description", data?.description);
-        }
-
         formData.append("price", data?.price);
 
         if (data?.discountPrice) {
             formData.append("discountPrice", data?.discountPrice);
         }
 
+        if (data?.description) {
+            formData.append("description", data?.description);
+        }
+
         if (data?.files && data?.files.length > 0) {
             data?.files?.forEach((file) => {
                 formData.append("uploadedFiles", file);
+            });
+        }
+
+        if (removedFiles && removedFiles.length > 0) {
+            removedFiles.forEach((file) => {
+                formData.append("deletedFiles", file);
             });
         }
 

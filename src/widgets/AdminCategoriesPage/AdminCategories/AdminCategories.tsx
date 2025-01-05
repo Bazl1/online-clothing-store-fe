@@ -15,8 +15,8 @@ import {
     useToggleCategories
 } from "@/apis";
 import {
-    PaginationLimitsList,
-    CategoriesGroupActionsList,
+    paginationLimitsList,
+    categoriesGroupActionsList,
     SUCCESS_MESSAGE
 } from "@/shared";
 
@@ -25,10 +25,10 @@ import styles from "./AdminCategories.module.scss";
 const AdminCategories = () => {
     const [isCreatePopupOpen, setIsCreatePopupOpen] = useState<boolean>(false);
     const [activePage, setActivePage] = useState<number>(1);
-    const [perPage, setPerPage] = useState<number>(PaginationLimitsList[0]);
+    const [perPage, setPerPage] = useState<number>(paginationLimitsList[0]);
     const [search, setSearch] = useState<string>("");
     const [groupAction, setGroupAction] = useState<string>(
-        CategoriesGroupActionsList[0].value
+        categoriesGroupActionsList[0].value
     );
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -99,7 +99,7 @@ const AdminCategories = () => {
                                     <GroupActionsSelect
                                         value={groupAction}
                                         onChange={setGroupAction}
-                                        options={CategoriesGroupActionsList}
+                                        options={categoriesGroupActionsList}
                                         onSubmit={handleApplyGroupAction}
                                     />
                                 </div>
@@ -135,7 +135,7 @@ const AdminCategories = () => {
                                         onChange={setActivePage}
                                         perPage={perPage}
                                         onChangePerPage={setPerPage}
-                                        limitsList={PaginationLimitsList}
+                                        limitsList={paginationLimitsList}
                                         totalItems={
                                             categoriesData?.totalItems || 0
                                         }

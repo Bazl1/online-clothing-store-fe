@@ -13,8 +13,8 @@ import { Button, Pagination } from "@/ui";
 import { useDeleteProducts, useGetProducts, useToggleProducts } from "@/apis";
 import {
     ADMIN_CREATE_PRODUCTS_ROUTE,
-    PaginationLimitsList,
-    ProductsGroupActionsList,
+    paginationLimitsList,
+    productsGroupActionsList,
     SUCCESS_MESSAGE
 } from "@/shared";
 
@@ -22,10 +22,10 @@ import styles from "./AdminProducts.module.scss";
 
 const AdminProducts = () => {
     const [activePage, setActivePage] = useState<number>(1);
-    const [perPage, setPerPage] = useState<number>(PaginationLimitsList[0]);
+    const [perPage, setPerPage] = useState<number>(paginationLimitsList[0]);
     const [search, setSearch] = useState<string>("");
     const [groupAction, setGroupAction] = useState<string>(
-        ProductsGroupActionsList[0]?.value
+        productsGroupActionsList[0]?.value
     );
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -96,7 +96,7 @@ const AdminProducts = () => {
                                 <GroupActionsSelect
                                     value={groupAction}
                                     onChange={setGroupAction}
-                                    options={ProductsGroupActionsList}
+                                    options={productsGroupActionsList}
                                     onSubmit={handleApplyGroupAction}
                                 />
                             </div>
@@ -132,7 +132,7 @@ const AdminProducts = () => {
                                     onChange={setActivePage}
                                     perPage={perPage}
                                     onChangePerPage={setPerPage}
-                                    limitsList={PaginationLimitsList}
+                                    limitsList={paginationLimitsList}
                                     totalItems={productsData?.totalItems || 0}
                                 />
                             </div>
