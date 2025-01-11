@@ -9,3 +9,5 @@ export * from "./AdminProductsPage";
 export * from "./AdminCreateProductPage";
 export * from "./AdminEditProductPage";
 export * from "./CatalogPage";
+export * from "./ProductPage";
+export * from "./CheckoutPage";

@@ -59,14 +59,14 @@ const Header = () => {
                         </ul>
                     </nav>
                     <div className={styles.header__row}>
+                        <button className={styles.header__btn}>
+                            <Heart size={16} />
+                        </button>
+                        <button className={styles.header__btn}>
+                            <ShoppingBag size={16} />
+                        </button>
                         {user ? (
                             <>
-                                <button className={styles.header__btn}>
-                                    <Heart size={16} />
-                                </button>
-                                <button className={styles.header__btn}>
-                                    <ShoppingBag size={16} />
-                                </button>
                                 <button
                                     className={styles.header__btn}
                                     onClick={goProfile}

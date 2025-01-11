@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 
-import { SearchInput } from "@/components";
+import { CatalogFilter } from "@/widgets";
+import { ProductCard, SearchInput } from "@/components";
 import { Select } from "@/ui";
 
 import { sortList } from "@/shared";
 
 import styles from "./Catalog.module.scss";
-import { CatalogFilter } from "./components";
 
 const Catalog = () => {
     const [search, setSearch] = useState<string>("");
@@ -34,7 +34,15 @@ const Catalog = () => {
                         <div className={styles.catalog__column}>
                             <CatalogFilter />
                         </div>
-                        <div className={styles.catalog__column}></div>
+                        <div className={styles.catalog__column}>
+                            <div className={styles.catalog__products}>
+                                <ProductCard />
+                                <ProductCard />
+                                <ProductCard />
+                                <ProductCard />
+                                <ProductCard />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
