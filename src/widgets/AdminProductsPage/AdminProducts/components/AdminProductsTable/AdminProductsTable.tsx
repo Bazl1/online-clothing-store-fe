@@ -23,7 +23,7 @@ const columns = [
         header: () => <span>Name</span>,
         cell: (info) => info.getValue()
     }),
-    columnHelper.accessor("category", {
+    columnHelper.accessor("category.title", {
         header: () => <span>Category</span>,
         cell: (info) => info.getValue()
     }),

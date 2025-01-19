@@ -12,8 +12,8 @@ export const AdminCreateProductSchema = yup.object({
     articul: yup.string().trim().required(REQUIRED_FIELD),
     category: yup.string().trim().required(REQUIRED_FIELD),
     price: yup.string().trim().required(REQUIRED_FIELD),
-    discountPrice: yup.string().trim(),
-    description: yup.string().trim()
+    discountPrice: yup.string().trim().nullable(),
+    description: yup.string().trim().nullable()
 });
 
 export type AdminCreateProductInputs = yup.InferType<

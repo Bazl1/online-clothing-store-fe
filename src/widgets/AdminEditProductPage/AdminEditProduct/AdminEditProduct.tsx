@@ -94,7 +94,9 @@ const AdminEditProduct = () => {
             setValue("price", productData?.data?.price.toString());
             setValue(
                 "discountPrice",
-                productData?.data?.discountPrice.toString()
+                productData?.data?.discountPrice
+                    ? productData?.data?.discountPrice.toString()
+                    : ""
             );
             setValue("description", productData?.data?.description);
         }
