@@ -17,6 +17,7 @@
         &:nth-child(1) {
             max-width: 280px;
             width: 100%;
+            flex-shrink: 0;
             border-right: 2px solid $gray-color-100;
         }
     }

@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import cn from "classnames";
 
 import { AdminEditProductFiles } from "@/widgets";
 import { Button, Input, Select, Textarea } from "@/ui";
@@ -62,14 +63,8 @@ const AdminEditProduct = () => {
         formData.append("articul", data?.articul);
         formData.append("categoryId", data?.category);
         formData.append("price", data?.price);
-
-        if (data?.discountPrice) {
-            formData.append("discountPrice", data?.discountPrice);
-        }
-
-        if (data?.description) {
-            formData.append("description", data?.description);
-        }
+        formData.append("discountPrice", data?.discountPrice ?? "");
+        formData.append("description", data?.description ?? "");
 
         if (data?.files && data?.files.length > 0) {
             data?.files?.forEach((file) => {
@@ -104,7 +99,7 @@ const AdminEditProduct = () => {
 
     return (
         <section className={styles.admin}>
-            <div className="container">
+            <div className={cn(styles.admin__container, "container")}>
                 <div className={styles.admin__inner}>
                     <h2 className={styles.admin__title}>Edit product</h2>
                     <form
@@ -112,23 +107,27 @@ const AdminEditProduct = () => {
                         onSubmit={handleSubmit(onSubmit)}
                     >
                         <div className={styles.admin__row}>
-                            <Controller
-                                name="files"
-                                control={control}
-                                render={({
-                                    field: { onChange, value },
-                                    fieldState: { error }
-                                }) => (
-                                    <AdminEditProductFiles
-                                        label="Images"
-                                        data={productData?.data?.images || []}
-                                        value={value ?? []}
-                                        onChange={onChange}
-                                        onChangeRemoved={setRemovedFiles}
-                                        error={error?.message}
-                                    />
-                                )}
-                            />
+                            {productData?.data?.images ? (
+                                <Controller
+                                    name="files"
+                                    control={control}
+                                    render={({
+                                        field: { onChange, value },
+                                        fieldState: { error }
+                                    }) => (
+                                        <AdminEditProductFiles
+                                            label="Images"
+                                            data={
+                                                productData?.data?.images || []
+                                            }
+                                            value={value ?? []}
+                                            onChange={onChange}
+                                            onChangeRemoved={setRemovedFiles}
+                                            error={error?.message}
+                                        />
+                                    )}
+                                />
+                            ) : null}
                         </div>
                         <div className={styles.admin__row}>
                             <Input

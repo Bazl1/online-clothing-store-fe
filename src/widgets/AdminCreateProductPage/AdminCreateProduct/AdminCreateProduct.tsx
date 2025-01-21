@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import cn from "classnames";
 
 import { AdminCreateProductFiles } from "@/widgets";
 import { Button, Input, Select, Textarea } from "@/ui";
@@ -69,7 +70,7 @@ const AdminCreateProduct = () => {
 
     return (
         <section className={styles.admin}>
-            <div className="container">
+            <div className={cn(styles.admin__container, "container")}>
                 <div className={styles.admin__inner}>
                     <h2 className={styles.admin__title}>Create product</h2>
                     <form

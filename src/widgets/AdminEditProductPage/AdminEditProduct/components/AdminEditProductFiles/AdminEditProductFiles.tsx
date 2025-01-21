@@ -7,6 +7,7 @@ import { Upload } from "lucide-react";
 import { ImageSlider } from "@/components";
 import { Dropzone, FormField } from "@/ui";
 
+import { STORAGE_URL } from "@/shared";
 import {
     AdminEditProductFilesProps,
     ISlide
@@ -23,7 +24,10 @@ const AdminEditProductFiles = ({
     error
 }: AdminEditProductFilesProps) => {
     const [slides, setSlides] = useState<ISlide[]>(
-        (data || []).map((slide) => ({ id: uuidv4(), src: slide }))
+        (data || []).map((slide) => ({
+            id: uuidv4(),
+            src: `${STORAGE_URL}${slide}`
+        }))
     );
 
     const handleAddFiles = (files: File[]) => {
@@ -47,8 +51,10 @@ const AdminEditProductFiles = ({
             onChange(updatedValue);
         }
 
-        if (onChangeRemoved && data?.includes(slide?.src)) {
-            onChangeRemoved((prev: string[]) => [...prev, slide.src]);
+        const slideId = slide.src.slice(slide.src.lastIndexOf("/") + 1);
+
+        if (onChangeRemoved && data?.includes(slideId)) {
+            onChangeRemoved((prev: string[]) => [...prev, slideId]);
         }
     };
 
