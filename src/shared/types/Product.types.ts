@@ -14,6 +14,11 @@ export interface IProduct {
     updatedAt: Date;
 }
 
+export interface ICart {
+    id: string;
+    count: number;
+}
+
 export interface GetProductsResponse {
     success: boolean;
     data: IProduct[];

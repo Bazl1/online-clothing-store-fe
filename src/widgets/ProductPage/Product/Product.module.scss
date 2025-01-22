@@ -53,4 +53,11 @@
         gap: 10px;
         margin-bottom: 20px;
     }
+
+    &__like_btn {
+        max-width: 40px;
+        width: 40px;
+        flex-shrink: 0;
+        padding: 0;
+    }
 }
