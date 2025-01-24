@@ -8,6 +8,7 @@ import { Button } from "@/ui";
 
 import { useAuthStore } from "@/store";
 import {
+    CART_ROUTE,
     menuList,
     PROFILE_ROUTE,
     SIGN_IN_ROUTE,
@@ -28,6 +29,10 @@ const Header = () => {
 
     const goSignUp = () => {
         router.push(SIGN_UP_ROUTE);
+    };
+
+    const goCart = () => {
+        router.push(CART_ROUTE);
     };
 
     return (
@@ -62,7 +67,7 @@ const Header = () => {
                         <button className={styles.header__btn}>
                             <Heart size={16} />
                         </button>
-                        <button className={styles.header__btn}>
+                        <button className={styles.header__btn} onClick={goCart}>
                             <ShoppingBag size={16} />
                         </button>
                         {user ? (

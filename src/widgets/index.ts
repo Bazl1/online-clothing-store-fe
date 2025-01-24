@@ -11,3 +11,4 @@ export * from "./AdminEditProductPage";
 export * from "./CatalogPage";
 export * from "./ProductPage";
 export * from "./CheckoutPage";
+export * from "./CartPage";
