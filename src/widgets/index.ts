@@ -12,3 +12,6 @@ export * from "./CatalogPage";
 export * from "./ProductPage";
 export * from "./CheckoutPage";
 export * from "./CartPage";
+export * from "./FavoritesPage";
+export * from "./HistoryPage";
+export * from "./AdminOrdersPage";

@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 import { ToastContainer } from "react-toastify";
 import { QueryClientProvider } from "@tanstack/react-query";
 
-import { Header } from "@/widgets";
+import { Footer, Header } from "@/widgets";
 
 import { useQueryClientProvider } from "@/shared";
 
@@ -16,6 +16,7 @@ const MainLayout = ({ children }: { children: ReactNode }) => {
             <div className="wrapper">
                 <Header />
                 <main className="main">{children}</main>
+                <Footer />
                 <ToastContainer
                     position="top-right"
                     autoClose={3000}

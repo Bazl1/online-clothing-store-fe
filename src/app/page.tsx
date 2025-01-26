@@ -1,4 +1,9 @@
-import { HomeCategories, HomeHero, HomeNewProducts } from "@/widgets";
+import {
+    HomeCategories,
+    HomeHero,
+    HomeNewProducts,
+    Newsletter
+} from "@/widgets";
 
 export default function Home() {
     return (
@@ -6,6 +11,7 @@ export default function Home() {
             <HomeHero />
             <HomeNewProducts />
             <HomeCategories />
+            <Newsletter />
         </>
     );
 }

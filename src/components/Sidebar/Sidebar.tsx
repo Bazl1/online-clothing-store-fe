@@ -23,7 +23,7 @@ const Sidebar = ({ list }: SidebarProps) => {
                             <Link
                                 className={cn(styles.sidebar__menu_link, {
                                     [styles.sidebar__menu_link_active]:
-                                        pathname.startsWith(item?.href)
+                                        pathname === item?.href
                                 })}
                                 href={item?.href}
                             >

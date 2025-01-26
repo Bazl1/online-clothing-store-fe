@@ -33,13 +33,15 @@ export const useCartStore = create<useCartStoreProps>()(
 
                     set({ cart: newCarts });
                 } else if (!get().cart.some((item) => item.id === cart.id)) {
-                    set({ cart: [...get().cart, cart] });
+                    set((state) => ({
+                        cart: [...state.cart, cart]
+                    }));
                 }
             },
             removeProduct: (id: string) => {
-                set({
-                    cart: get().cart.filter((item) => item.id !== id)
-                });
+                set((state) => ({
+                    cart: state.cart.filter((item) => item.id !== id)
+                }));
             },
             clearCart: () => set({ cart: [] })
         }),

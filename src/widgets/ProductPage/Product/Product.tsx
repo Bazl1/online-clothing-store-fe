@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, HeartOff, ShoppingBag } from "lucide-react";
 
 import { ProductSlider } from "@/widgets";
 import { ProductCounter } from "@/components";
 import { Button } from "@/ui";
 
-import { useCartStore } from "@/store";
+import { useCartStore, useFavoriteStore } from "@/store";
 
 import styles from "./Product.module.scss";
 
@@ -16,10 +16,15 @@ const Product = () => {
     const { id } = useParams<{ id: string }>();
 
     const { cart, addProduct } = useCartStore((state) => state);
+    const { favorites, toggleFavorite } = useFavoriteStore((state) => state);
 
     const [counterValue, setCounterValue] = useState<number>(
         cart?.find((item: any) => item?.id === id)?.count || 1
     );
+
+    const handleToggleFavorite = () => {
+        toggleFavorite(id);
+    };
 
     const handleAddToCart = () => {
         addProduct({ id: id, count: counterValue });
@@ -60,8 +65,15 @@ const Product = () => {
                                 >
                                     Add to cart
                                 </Button>
-                                <Button className={styles.product__like_btn}>
-                                    <Heart size={20} strokeWidth={2} />
+                                <Button
+                                    className={styles.product__like_btn}
+                                    onClick={handleToggleFavorite}
+                                >
+                                    {favorites?.includes(id) ? (
+                                        <HeartOff size={20} strokeWidth={2} />
+                                    ) : (
+                                        <Heart size={20} strokeWidth={2} />
+                                    )}
                                 </Button>
                             </div>
                             <p className={styles.product__description}>

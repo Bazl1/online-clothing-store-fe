@@ -1,9 +1,9 @@
-import { AdminOrders } from "@/widgets";
+import { History } from "@/widgets";
 
 const page = () => {
     return (
         <>
-            <AdminOrders />
+            <History />
         </>
     );
 };

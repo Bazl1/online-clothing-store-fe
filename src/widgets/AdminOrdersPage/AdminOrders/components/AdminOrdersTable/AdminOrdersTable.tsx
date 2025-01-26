@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
     createColumnHelper,
     flexRender,
@@ -8,41 +7,35 @@ import {
     useReactTable
 } from "@tanstack/react-table";
 
-import { AdminProductsTableRow } from "@/widgets";
-import { Checkbox } from "@/ui";
+import { AdminOrdersTableRow } from "@/widgets";
 
-import { IProduct, useMounted } from "@/shared";
-import { AdminProductsTableProps } from "./AdminProductsTable.types";
+import { useMounted } from "@/shared";
+import { AdminOrdersTableProps } from "./AdminOrdersTable.types";
 
-import styles from "./AdminProductsTable.module.scss";
+import styles from "./AdminOrdersTable.module.scss";
 
-const columnHelper = createColumnHelper<IProduct>();
+const columnHelper = createColumnHelper<any>();
 
 const columns = [
-    columnHelper.accessor("title", {
+    columnHelper.accessor("order", {
+        header: () => <span>№</span>,
+        cell: (info) => info.getValue()
+    }),
+    columnHelper.accessor("fullname", {
         header: () => <span>Name</span>,
         cell: (info) => info.getValue()
     }),
-    columnHelper.accessor("category.title", {
-        header: () => <span>Category</span>,
+    columnHelper.accessor("email", {
+        header: () => <span>Email</span>,
         cell: (info) => info.getValue()
     }),
-    columnHelper.accessor("isActive", {
+    columnHelper.accessor("status", {
         header: () => <span>Active</span>,
         cell: (info) => (info.getValue() ? "Active" : "Inactive")
     })
 ];
 
-const AdminProductsTable = ({
-    data,
-    selectedItems,
-    onSelect,
-    onSelectAll,
-    onDelete,
-    onToggle
-}: AdminProductsTableProps) => {
-    const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
-
+const AdminOrdersTable = ({ data }: AdminOrdersTableProps) => {
     const { mounted } = useMounted();
 
     const table = useReactTable({
@@ -53,26 +46,9 @@ const AdminProductsTable = ({
 
     if (!mounted) return null;
 
-    const handleSelectAll = (isChecked: boolean) => {
-        setIsAllSelected(isChecked);
-        onSelectAll(isChecked);
-    };
-
-    const handleSelectItem = (isChecked: boolean, id: string) => {
-        onSelect(isChecked, id);
-        setIsAllSelected(data.length === selectedItems.length + 1 && isChecked);
-    };
-
     return (
         <div className={styles.table}>
             <div className={styles.table__head}>
-                <div className={styles.table__head_checkbox}>
-                    <Checkbox
-                        checked={isAllSelected}
-                        onChange={(e) => handleSelectAll(e.target.checked)}
-                    />
-                </div>
-
                 {table.getHeaderGroups().map((headerGroup) => (
                     <div
                         key={headerGroup.id}
@@ -96,18 +72,11 @@ const AdminProductsTable = ({
             </div>
             <div className={styles.table__body}>
                 {table.getRowModel().rows.map((row) => (
-                    <AdminProductsTableRow
-                        key={row.original.id}
-                        row={row}
-                        selectedItems={selectedItems}
-                        handleSelectItem={handleSelectItem}
-                        onDelete={onDelete}
-                        onToggle={onToggle}
-                    />
+                    <AdminOrdersTableRow key={row.original.id} row={row} />
                 ))}
             </div>
         </div>
     );
 };
 
-export default AdminProductsTable;
+export default AdminOrdersTable;

@@ -1,16 +1,37 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { Heart, HeartOff } from "lucide-react";
+
+import { useFavoriteStore } from "@/store";
 
 import styles from "./ProductCard.module.scss";
 
 const ProductCard = () => {
+    const demoId = "1";
+
+    const { favorites, toggleFavorite } = useFavoriteStore((state) => state);
+
+    const handleToggleFavorite = (e: any) => {
+        e.preventDefault();
+        toggleFavorite(demoId);
+        // clear favorite cache
+    };
+
     return (
         <Link href="/" className={styles.product}>
             <div className={styles.product__img}>
                 <Image src="/img/background-hero.jpg" alt="img" fill />
-                <button className={styles.product__like}>
-                    <Heart size={18} strokeWidth={1.5} />
+                <button
+                    className={styles.product__like}
+                    onClick={(e) => handleToggleFavorite(e)}
+                >
+                    {favorites.includes(demoId) ? (
+                        <HeartOff size={18} strokeWidth={1.5} />
+                    ) : (
+                        <Heart size={18} strokeWidth={1.5} />
+                    )}
                 </button>
             </div>
             <h3 className={styles.product__title}>Test text</h3>
