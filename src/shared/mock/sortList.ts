@@ -1,18 +1,18 @@
 export const sortList = [
     {
-        value: "",
+        value: "created-desc",
         label: "Newest first"
     },
     {
-        value: "",
+        value: "created-asc",
         label: "Oldest first"
     },
     {
-        value: "",
+        value: "price-asc",
         label: "From the lowest price"
     },
     {
-        value: "",
+        value: "price-desc",
         label: "From the highest price"
     }
 ];

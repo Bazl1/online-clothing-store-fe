@@ -10,7 +10,12 @@ import styles from "./Checkbox.module.scss";
 
 const Checkbox = forwardRef(
     (
-        { size = "md", error, isDisabled = false, ...props }: CheckboxProps,
+        {
+            size = "md",
+            isError = false,
+            isDisabled = false,
+            ...props
+        }: CheckboxProps,
         ref: Ref<HTMLInputElement>
     ) => {
         return (
@@ -19,6 +24,7 @@ const Checkbox = forwardRef(
                     ref={ref}
                     className={styles.checkbox__input}
                     type="checkbox"
+                    disabled={isDisabled}
                     {...props}
                 />
                 <span
@@ -26,7 +32,7 @@ const Checkbox = forwardRef(
                         styles.checkbox__mark,
                         styles[`checkbox__mark_${size}`],
                         {
-                            [styles.checkbox__mark_error]: error,
+                            [styles.checkbox__mark_error]: isError,
                             [styles.checkbox__mark_disabled]: isDisabled
                         }
                     )}

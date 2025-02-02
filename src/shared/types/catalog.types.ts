@@ -1,3 +1,4 @@
+import { ICategory } from "./category.types";
 import { IProduct } from "./product.types";
 
 export interface GetCatalogProductsResponse {
@@ -9,4 +10,12 @@ export interface GetCatalogProductsResponse {
 
 export interface GetCatalogProductByIdResponse {
     data: IProduct;
+}
+
+export interface GetCatalogCategoriesResponse {
+    data: ICategory[];
+}
+
+export interface GetCatalogProductsByIds {
+    data: IProduct[];
 }

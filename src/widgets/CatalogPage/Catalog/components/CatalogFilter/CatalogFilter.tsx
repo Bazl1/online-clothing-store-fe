@@ -2,18 +2,25 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { CatalogFilterCategories } from "@/widgets";
 import { Button, Input } from "@/ui";
 
-import styles from "./CatalogFilter.module.scss";
+import { CatalogFilterInputs, CatalogFilterSchema } from "@/shared";
+import { CatalogFilterProps } from "./CatalogFilter.types";
 
-const CatalogFilter = () => {
+import styles from "./CatalogFilter.module.scss";
+import { toast } from "react-toastify";
+
+const CatalogFilter = ({ onChange }: CatalogFilterProps) => {
     const {
         handleSubmit,
         register,
         formState: { errors }
-    } = useForm();
+    } = useForm<CatalogFilterInputs>({
+        resolver: yupResolver(CatalogFilterSchema)
+    });
 
     const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
@@ -23,7 +30,20 @@ const CatalogFilter = () => {
         );
     };
 
-    const onSubmit = (data: any) => {};
+    const onSubmit = (data: CatalogFilterInputs) => {
+        if (
+            data?.maxPrice &&
+            data?.minPrice &&
+            Number(data?.maxPrice) < Number(data?.minPrice)
+        )
+            return toast.error("Max price should be greater than min price");
+
+        onChange({
+            maxPrice: data?.maxPrice,
+            minPrice: data?.minPrice,
+            categoryIds: selectedItems
+        });
+    };
 
     return (
         <form className={styles.catalog} onSubmit={handleSubmit(onSubmit)}>
@@ -41,15 +61,15 @@ const CatalogFilter = () => {
                         type="number"
                         label="Min"
                         min={0}
-                        error={errors.min?.message}
-                        {...register("min")}
+                        error={errors.minPrice?.message}
+                        {...register("minPrice")}
                     />
                     <Input
                         type="number"
                         label="Max"
                         min={0}
-                        error={errors.max?.message}
-                        {...register("max")}
+                        error={errors.maxPrice?.message}
+                        {...register("maxPrice")}
                     />
                 </div>
             </div>

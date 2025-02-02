@@ -12,9 +12,9 @@ const useGetCatalogProducts = (
     limit: number,
     search: string,
     sort: string,
-    maxPrice: number,
-    minPrice: number,
-    categoryIds: string[]
+    maxPrice?: string | null,
+    minPrice?: string | null,
+    categoryIds?: string[] | null
 ): UseQueryResult<GetCatalogProductsResponse, Error> => {
     return useQuery({
         queryKey: [

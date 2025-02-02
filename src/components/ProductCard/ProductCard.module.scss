@@ -3,6 +3,9 @@
 .product {
     max-width: 280px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid $border-color;
     border-radius: 4px;
     background: $white-color;
@@ -70,5 +73,24 @@
         font-weight: 500;
         color: $dark-color;
         line-height: 21px;
+    }
+
+    &__row {
+        width: 100%;
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__price_sale {
+        text-decoration: line-through;
+    }
+
+    &__sale {
+        font-size: 21px;
+        font-weight: 500;
+        color: $red-color-500;
+        line-height: 24px;
     }
 }

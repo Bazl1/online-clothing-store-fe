@@ -5,3 +5,4 @@ export * from "./GroupActionsSelect";
 export * from "./ImageSlider";
 export * from "./ProductCard";
 export * from "./ProductCounter";
+export * from "./ProductsSlider";

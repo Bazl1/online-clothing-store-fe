@@ -1,6 +1,6 @@
 import { Checkbox } from "@/ui";
 
-import { useGetCategoriesList } from "@/apis";
+import { useGetCatalogCategories } from "@/apis";
 import { CatalogFilterCategoriesProps } from "./CatalogFilterCategories.types";
 
 import styles from "./CatalogFilterCategories.module.scss";
@@ -10,7 +10,7 @@ const CatalogFilterCategories = ({
     onSelect
 }: CatalogFilterCategoriesProps) => {
     const { data: categoriesData, isLoading: categoriesIsLoading } =
-        useGetCategoriesList();
+        useGetCatalogCategories();
 
     const handleSelectItem = (isChecked: boolean, id: string) => {
         onSelect(isChecked, id);

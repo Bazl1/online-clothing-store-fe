@@ -4,15 +4,31 @@ import { useState } from "react";
 
 import { CatalogFilter } from "@/widgets";
 import { ProductCard, SearchInput } from "@/components";
-import { Select } from "@/ui";
+import { Pagination, Select } from "@/ui";
 
-import { sortList } from "@/shared";
+import { useGetCatalogProducts } from "@/apis";
+import { paginationLimitsList, sortList } from "@/shared";
+import { FiltersProps } from "./Catalog.types";
 
 import styles from "./Catalog.module.scss";
 
 const Catalog = () => {
     const [search, setSearch] = useState<string>("");
-    const [selectedSort, setSelectedSort] = useState<string>("");
+    const [activePage, setActivePage] = useState<number>(1);
+    const [perPage, setPerPage] = useState<number>(paginationLimitsList[0]);
+    const [selectedSort, setSelectedSort] = useState<string>(sortList[0].value);
+    const [filters, setFilters] = useState<FiltersProps>({});
+
+    const { data: productsData, isLoading: productsIsLoading } =
+        useGetCatalogProducts(
+            activePage,
+            perPage,
+            search,
+            selectedSort,
+            filters.maxPrice,
+            filters.minPrice,
+            filters.categoryIds
+        );
 
     return (
         <section className={styles.catalog}>
@@ -32,16 +48,33 @@ const Catalog = () => {
                     </div>
                     <div className={styles.catalog__row}>
                         <div className={styles.catalog__column}>
-                            <CatalogFilter />
+                            <CatalogFilter onChange={setFilters} />
                         </div>
                         <div className={styles.catalog__column}>
-                            <div className={styles.catalog__products}>
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                                <ProductCard />
-                            </div>
+                            {!productsIsLoading ? (
+                                <>
+                                    <div className={styles.catalog__products}>
+                                        {productsData?.data.map((product) => (
+                                            <ProductCard
+                                                key={product?.id}
+                                                data={product}
+                                            />
+                                        ))}
+                                    </div>
+                                    <div className={styles.catalog__pagination}>
+                                        <Pagination
+                                            currentPage={activePage}
+                                            onChange={setActivePage}
+                                            perPage={perPage}
+                                            onChangePerPage={setPerPage}
+                                            limitsList={paginationLimitsList}
+                                            totalItems={
+                                                productsData?.totalItems || 0
+                                            }
+                                        />
+                                    </div>
+                                </>
+                            ) : null}
                         </div>
                     </div>
                 </div>
