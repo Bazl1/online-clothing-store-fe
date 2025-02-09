@@ -6,7 +6,7 @@ import { Heart, HeartOff } from "lucide-react";
 import cn from "classnames";
 
 import { useFavoriteStore } from "@/store";
-import { STORAGE_URL } from "@/shared";
+import { PRODUCT_ROUTE, STORAGE_URL } from "@/shared";
 import { ProductCardProps } from "./ProductCard.types";
 
 import styles from "./ProductCard.module.scss";
@@ -17,11 +17,10 @@ const ProductCard = ({ data }: ProductCardProps) => {
     const handleToggleFavorite = (e: any) => {
         e.preventDefault();
         toggleFavorite(data?.id);
-        //TODO: clear favorite cache
     };
 
     return (
-        <Link href="/" className={styles.product}>
+        <Link href={`${PRODUCT_ROUTE}/${data?.id}`} className={styles.product}>
             <div className={styles.product__img}>
                 <Image
                     src={`${STORAGE_URL}${data?.images[0]}`}

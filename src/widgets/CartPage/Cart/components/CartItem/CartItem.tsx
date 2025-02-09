@@ -14,7 +14,7 @@ import { CartItemProps } from "./CartItem.types";
 import styles from "./CartItem.module.scss";
 
 const CartItem = ({ data }: CartItemProps) => {
-    const { cart, removeProduct } = useCartStore((state) => state);
+    const { cart, addProduct, removeProduct } = useCartStore((state) => state);
 
     const [count, setCount] = useState<number>(
         cart.find((item) => item.id === data.id)?.count || 1
@@ -25,6 +25,11 @@ const CartItem = ({ data }: CartItemProps) => {
     const handleRemove = () => {
         removeProduct(data.id);
         queryClient.invalidateQueries({ queryKey: ["cart"] });
+    };
+
+    const handleOnChangeCount = (value: number) => {
+        addProduct({ id: data?.id, count: value });
+        setCount(value);
     };
 
     return (
@@ -45,7 +50,7 @@ const CartItem = ({ data }: CartItemProps) => {
                             <span>
                                 $
                                 {data?.discountPrice
-                                    ? data?.discountPrice
+                                    ? data?.discountPrice * count
                                     : data?.price * count}
                             </span>
                         </p>
@@ -56,7 +61,11 @@ const CartItem = ({ data }: CartItemProps) => {
                 <button className={styles.cart__btn} onClick={handleRemove}>
                     <Trash strokeWidth={1} size={20} />
                 </button>
-                <ProductCounter size="sm" value={count} onChange={setCount} />
+                <ProductCounter
+                    size="sm"
+                    value={count}
+                    onChange={handleOnChangeCount}
+                />
             </div>
         </div>
     );

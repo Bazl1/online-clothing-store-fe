@@ -1,23 +1,80 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { toast } from "react-toastify";
 
 import { Button, Input } from "@/ui";
 
-import { useAuthStore } from "@/store";
+import { useCreateOrder } from "@/apis";
+import { useAuthStore, useCartStore } from "@/store";
+import { CheckoutFormInputs, CheckoutFormSchema, HOME_ROUTE } from "@/shared";
 
 import styles from "./CheckoutForm.module.scss";
 
 const CheckoutForm = () => {
+    const user = useAuthStore((state) => state.user);
+
     const {
         handleSubmit,
         register,
         formState: { errors }
-    } = useForm();
+    } = useForm<CheckoutFormInputs>({
+        resolver: yupResolver(CheckoutFormSchema),
+        defaultValues: {
+            firstName: user?.firstName || "",
+            lastName: user?.lastName || "",
+            email: user?.email || "",
+            phone: user?.phoneNumber || "",
+            country: user?.address?.country || "",
+            state: user?.address?.state || "",
+            city: user?.address?.city || "",
+            street: user?.address?.street || "",
+            house: user?.address?.house || "",
+            flat: user?.address?.flat || "",
+            floor: user?.address?.floor || "",
+            zip: user?.address?.zip || ""
+        }
+    });
 
-    const user = useAuthStore((state) => state.user);
+    const { cart, clearCart } = useCartStore((state) => state);
 
-    const onSubmit = (data: any) => {};
+    const router = useRouter();
+
+    const { mutate: createOrder } = useCreateOrder({
+        onSuccess: () => {
+            toast.success("Order created successfully");
+            router.push(HOME_ROUTE);
+            clearCart();
+        }
+    });
+
+    const onSubmit = (data: CheckoutFormInputs) => {
+        const requestData = {
+            email: data?.email,
+            phoneNumber: data?.phone,
+            firstName: data?.firstName,
+            lastName: data?.lastName,
+            country: data?.country,
+            state: data?.state,
+            city: data?.city,
+            street: data?.street,
+            house: data?.house || null,
+            flat: data?.flat || null,
+            floor: data?.floor || null,
+            zip: data?.zip || null,
+            items:
+                cart?.map((item) => {
+                    return {
+                        productId: item?.id,
+                        quantity: item?.count
+                    };
+                }) || null
+        };
+
+        createOrder(requestData);
+    };
 
     return (
         <form className={styles.checkout} onSubmit={handleSubmit(onSubmit)}>
@@ -92,7 +149,7 @@ const CheckoutForm = () => {
                 </div>
             </div>
             <div className={styles.checkout__row}>
-                <Button>Confirm Order</Button>
+                <Button type="submit">Confirm Order</Button>
             </div>
         </form>
     );

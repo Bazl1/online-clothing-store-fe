@@ -7,14 +7,14 @@ import {
 import { CatalogService } from "@/services";
 import { GetCatalogProductsByIds } from "@/shared";
 
-const useGetCart = (
+const useGetCatalogFavorites = (
     ids: string[]
 ): UseQueryResult<GetCatalogProductsByIds, Error> => {
     return useQuery({
-        queryKey: ["cart", ids],
+        queryKey: ["favorites", ids],
         queryFn: () => CatalogService.getCatalogProductsByIds(ids),
         placeholderData: keepPreviousData
     });
 };
 
-export default useGetCart;
+export default useGetCatalogFavorites;

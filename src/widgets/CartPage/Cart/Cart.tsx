@@ -8,7 +8,12 @@ import { Button } from "@/ui";
 
 import { useGetCart } from "@/apis";
 import { useCartStore } from "@/store";
-import { CATALOG_ROUTE, CHECKOUT_ROUTE, ICart, IProduct } from "@/shared";
+import {
+    CATALOG_ROUTE,
+    CHECKOUT_ROUTE,
+    ICart,
+    totalPriceCounter
+} from "@/shared";
 
 import styles from "./Cart.module.scss";
 
@@ -20,21 +25,6 @@ const Cart = () => {
     );
 
     const router = useRouter();
-
-    const totalPrice = () => {
-        let total = 0;
-
-        cartData?.data.forEach((item: IProduct) => {
-            const cartItem = cart.find((cartItem) => cartItem.id === item.id);
-
-            if (cartItem) {
-                total += item?.discountPrice
-                    ? item?.discountPrice * cartItem?.count
-                    : item.price * cartItem?.count;
-            }
-        });
-        return total;
-    };
 
     const goCheckout = () => {
         router.push(CHECKOUT_ROUTE);
@@ -59,7 +49,13 @@ const Cart = () => {
                             <div className={styles.cart__row}>
                                 <p className={styles.cart__price}>
                                     Total:{" "}
-                                    <span>${totalPrice().toFixed(2)}</span>
+                                    <span>
+                                        $
+                                        {totalPriceCounter(
+                                            cartData,
+                                            cart
+                                        ).toFixed(2)}
+                                    </span>
                                 </p>
                                 <Button onClick={goCheckout}>Checkout</Button>
                             </div>

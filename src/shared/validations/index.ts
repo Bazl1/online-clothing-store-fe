@@ -10,3 +10,4 @@ export * from "./AdminCategoriesEditPopupSchema";
 export * from "./AdminCreateProductSchema";
 export * from "./AdminEditProductSchema";
 export * from "./CatalogFilterSchema";
+export * from "./CheckoutFormSchema";
