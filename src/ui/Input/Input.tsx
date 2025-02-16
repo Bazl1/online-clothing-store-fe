@@ -17,6 +17,7 @@ const Input = forwardRef(
             leftIcon,
             rightIcon,
             error,
+            isReadOnly = false,
             isRequired = false,
             isDisabled = false,
             ...props
@@ -51,6 +52,7 @@ const Input = forwardRef(
                             }
                         )}
                         type="text"
+                        readOnly={isReadOnly}
                         required={isRequired}
                         disabled={isDisabled}
                         {...props}

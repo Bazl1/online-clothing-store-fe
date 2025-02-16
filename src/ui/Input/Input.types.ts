@@ -9,6 +9,7 @@ export interface InputProps
     leftIcon?: ReactNode;
     rightIcon?: ReactNode;
     error?: any;
+    isReadOnly?: boolean;
     isRequired?: boolean;
     isDisabled?: boolean;
 }
