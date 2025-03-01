@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import { EllipsisVertical } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import cn from "classnames";
 
 import { FadeInDown, useOnClickOutside } from "@/shared";
 import { AdminOrdersTableRowDotsProps } from "./AdminOrdersTableRowDots.types";
@@ -11,7 +10,7 @@ import { AdminOrdersTableRowDotsProps } from "./AdminOrdersTableRowDots.types";
 import styles from "./AdminOrdersTableRowDots.module.scss";
 
 const AdminOrdersTableRowDots = ({
-    handleEdit
+    handleView
 }: AdminOrdersTableRowDotsProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -47,17 +46,9 @@ const AdminOrdersTableRowDots = ({
                     >
                         <button
                             className={styles.dots__btn}
-                            onClick={handleEdit}
+                            onClick={handleView}
                         >
-                            Edit
-                        </button>
-                        <button
-                            className={cn(
-                                styles.dots__btn,
-                                styles.dots__btn_red
-                            )}
-                        >
-                            Delete
+                            View
                         </button>
                     </motion.div>
                 ) : null}

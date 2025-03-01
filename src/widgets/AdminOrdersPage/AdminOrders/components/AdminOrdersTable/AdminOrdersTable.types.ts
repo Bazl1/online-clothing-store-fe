@@ -1,3 +1,5 @@
+import { IHistory } from "@/shared";
+
 export interface AdminOrdersTableProps {
-    data: any[];
+    data: IHistory[];
 }

@@ -1,3 +1,3 @@
 export interface AdminOrdersTableRowDotsProps {
-    handleEdit: () => void;
+    handleView: () => void;
 }

@@ -7,15 +7,16 @@ import {
 import { OrderService } from "@/services";
 import { GetHistoryResponse } from "@/shared";
 
-const useGetHistory = (
+const useGetOrders = (
     page: number,
-    perPage: number
+    perPage: number,
+    search: string
 ): UseQueryResult<GetHistoryResponse, Error> => {
     return useQuery({
-        queryKey: ["history", page, perPage],
-        queryFn: () => OrderService.getHistoryByUser(page, perPage),
+        queryKey: ["orders", page, perPage, search],
+        queryFn: () => OrderService.getOrders(page, perPage, search),
         placeholderData: keepPreviousData
     });
 };
 
-export default useGetHistory;
+export default useGetOrders;

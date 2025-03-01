@@ -6,32 +6,38 @@ import {
     getCoreRowModel,
     useReactTable
 } from "@tanstack/react-table";
+import dayjs from "dayjs";
 
 import { AdminOrdersTableRow } from "@/widgets";
 
-import { useMounted } from "@/shared";
+import { IHistory, useMounted } from "@/shared";
 import { AdminOrdersTableProps } from "./AdminOrdersTable.types";
 
 import styles from "./AdminOrdersTable.module.scss";
 
-const columnHelper = createColumnHelper<any>();
+const columnHelper = createColumnHelper<IHistory>();
 
 const columns = [
-    columnHelper.accessor("order", {
-        header: () => <span>№</span>,
+    columnHelper.accessor("id", {
+        header: () => <span>ID</span>,
         cell: (info) => info.getValue()
     }),
-    columnHelper.accessor("fullname", {
+    columnHelper.accessor((row) => `${row?.firstName} ${row?.lastName}`, {
+        id: "fullname",
         header: () => <span>Name</span>,
+        cell: (info) => info.getValue()
+    }),
+    columnHelper.accessor("phoneNumber", {
+        header: () => <span>Phone number</span>,
         cell: (info) => info.getValue()
     }),
     columnHelper.accessor("email", {
         header: () => <span>Email</span>,
         cell: (info) => info.getValue()
     }),
-    columnHelper.accessor("status", {
-        header: () => <span>Active</span>,
-        cell: (info) => (info.getValue() ? "Active" : "Inactive")
+    columnHelper.accessor("createdAt", {
+        header: () => <span>Created at</span>,
+        cell: (info) => dayjs(info.getValue()).format("DD.MM.YYYY")
     })
 ];
 

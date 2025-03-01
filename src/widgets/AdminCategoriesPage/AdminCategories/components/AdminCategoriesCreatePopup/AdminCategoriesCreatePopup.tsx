@@ -5,10 +5,12 @@ import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Upload } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
 import { Button, Dropzone, FormField, Input, Popup, Switch } from "@/ui";
 
+import { useCreateCategory } from "@/apis";
 import {
     AdminCategoriesCreatePopupinputs,
     AdminCategoriesCreatePopupSchema
@@ -16,8 +18,6 @@ import {
 import { AdminCategoriesCreatePopupProps } from "./AdminCategoriesCreatePopup.types";
 
 import styles from "./AdminCategoriesCreatePopup.module.scss";
-import { useCreateCategory } from "@/apis";
-import { useQueryClient } from "@tanstack/react-query";
 
 const AdminCategoriesCreatePopup = ({
     onClose
